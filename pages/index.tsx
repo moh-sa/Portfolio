@@ -7,7 +7,36 @@ const Home = ({ data }: { data: CardProps[] }) => {
   return (
     <div>
       <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <title>MSA Portfolio</title>
+        <meta
+          name="description"
+          content="MSA's Portfolio. Mohammed Sobhi Alafifi is an Computer Engineer who builds high-functional, user-friendly, and accessible web-based applications with a focus on simplicity & usability."
+        />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="MSA Portfolio" />
+        <meta
+          property="og:description"
+          content="MSA's Portfolio. Mohammed Sobhi Alafifi is an Computer Engineer who builds high-functional, user-friendly, and accessible web-based applications with a focus on simplicity & usability."
+        />
+        <meta property="og:image" content="https://tno.dev/api/og" />
+        <meta property="og:image:secure_url" content="https://tno.dev/api/og" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="600" />
+        <meta property="og:url" content="https://tno.dev" />
+        <meta property="og:local" content="en_US" />
+        <meta property="og:site_name" content="MSA's portfolio" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:creator" content="@Tno_MSA" />
+        <meta property="twitter:title" content="MSA Portfolio" />
+        <meta
+          property="twitter:description"
+          content="MSA's Portfolio. Mohammed Sobhi Alafifi is an Computer Engineer who builds high-functional, user-friendly, and accessible web-based applications with a focus on simplicity & usability."
+        />
+        <meta property="twitter:image" content="https://tno.dev/api/og" />
+
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="icon"
@@ -20,10 +49,6 @@ const Home = ({ data }: { data: CardProps[] }) => {
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
-        />
-        <meta
-          property="og:image"
-          content={`${process.env.NEXT_PUBLIC_BASE_URL}/api/og`}
         />
       </Head>
       <main className="flex h-screen flex-col text-white md:flex-row">
