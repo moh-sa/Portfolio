@@ -17,10 +17,10 @@ export default function () {
         <h1 tw="text-9xl text-[#d2bfb7] tracking-widest font-semibold -mb-8">
           M S A
         </h1>
-        <p tw="text-[29px] text-gray-400 tracking-tight">
+        <p tw="text-[29px] text-gray-400 tracking-wider">
           Mohammed Sobhi Alafifif
         </p>
-        <h1 tw="text-8xl text-[#d2bfb7] font-semibold">Portfolio</h1>
+        <h1 tw="text-8xl font-semibold">Portfolio</h1>
       </div>
     ),
     {
