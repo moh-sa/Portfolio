@@ -9,7 +9,7 @@ const Links = () => {
       <Button
         text="LinkedIn"
         icon="linkedin"
-        href="https://github.com/moh-sa"
+        href="https://www.linkedin.com/in/moh-sa"
       />
     </div>
   );
