@@ -8,14 +8,14 @@ const Home = ({ data }: { data: CardProps[] }) => {
     <div>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <title>MSA Portfolio</title>
+        <title>MSA's Portfolio</title>
         <meta
           name="description"
           content="MSA's Portfolio. Mohammed Sobhi Alafifi is an Computer Engineer who builds high-functional, user-friendly, and accessible web-based applications with a focus on simplicity & usability."
         />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="MSA Portfolio" />
+        <meta property="og:title" content="MSA's Portfolio" />
         <meta
           property="og:description"
           content="MSA's Portfolio. Mohammed Sobhi Alafifi is an Computer Engineer who builds high-functional, user-friendly, and accessible web-based applications with a focus on simplicity & usability."
@@ -30,7 +30,7 @@ const Home = ({ data }: { data: CardProps[] }) => {
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:creator" content="@Tno_MSA" />
-        <meta property="twitter:title" content="MSA Portfolio" />
+        <meta property="twitter:title" content="MSA's Portfolio" />
         <meta
           property="twitter:description"
           content="MSA's Portfolio. Mohammed Sobhi Alafifi is an Computer Engineer who builds high-functional, user-friendly, and accessible web-based applications with a focus on simplicity & usability."
