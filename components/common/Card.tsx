@@ -31,7 +31,7 @@ const Card = (props: CardProps) => {
           </video>
         )}
 
-        <div className="m-2">
+        <div className="m-4">
           <a href={props.demo_url} target="_blank">
             <h5 className="mb-2 text-2xl font-bold -tracking-tight text-white">
               {props.title}{" "}
@@ -43,7 +43,7 @@ const Card = (props: CardProps) => {
         </div>
       </div>
 
-      <div className="my-4 mx-2 flex flex-col flex-wrap gap-4 lg:flex-row lg:justify-center">
+      <div className="m-4 flex flex-col flex-wrap gap-4 lg:flex-row lg:justify-center">
         <Button icon="demo" href={props.demo_url} text="Live Demo" />
         <Button icon="github" href={props.repo_url} text="Github Repo" />
       </div>
