@@ -27,7 +27,7 @@ const Button = ({ icon, text, href }: Props) => {
     <a href={href} target="_blank" title={text} aria-label={text}>
       <button
         type="button"
-        className="flex w-full justify-center rounded-lg bg-[#094F6F] px-3 py-2.5 text-sm font-medium
+        className="flex w-full justify-center rounded-lg bg-[#094F6F] px-5 py-2.5 text-sm font-medium
         hover:bg-[#457B9D] focus:outline-none focus:ring-4 focus:ring-[#094F6F] md:inline-flex"
       >
         <svg
