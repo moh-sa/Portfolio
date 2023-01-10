@@ -46,9 +46,9 @@ export async function getStaticProps() {
     .then(() => console.log("connected to DB"))
     .catch((err) => console.error("connection error", err.stack));
 
-  const query = `SELECT * FROM projects ORDER BY id DESC ${
+  const query = `SELECT * FROM projects ${
     process.env.NODE_ENV === "production" ? "WHERE hide = false" : ""
-  }`;
+  } ORDER BY id DESC`;
 
   const { rows } = await client.query(query);
   const data: CardProps[] = rows;
