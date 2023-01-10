@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <Link
       href="/"
-      className={`mb-14 text-3xl font-semibold`}
+      className={`mb-14 text-3xl font-semibold text-[#d2bfb7]`}
       title="Home page"
       aria-label="Home page"
     >
