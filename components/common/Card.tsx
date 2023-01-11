@@ -44,8 +44,12 @@ const Card = (props: CardProps) => {
       </div>
 
       <div className="m-4 flex flex-col flex-wrap gap-4 lg:flex-row lg:justify-center">
-        <Button icon="demo" href={props.demo_url} text="Live Demo" />
-        <Button icon="github" href={props.repo_url} text="Github Repo" />
+        {!props.is_demo_disabled && (
+          <Button icon="demo" href={props.demo_url} text="Live Demo" />
+        )}
+        {!props.is_repo_disabled && (
+          <Button icon="github" href={props.repo_url} text="Github Repo" />
+        )}
       </div>
     </div>
   );
