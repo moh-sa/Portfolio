@@ -8,4 +8,6 @@ interface CardProps {
   demo_url: string;
   repo_url: string;
   hide: boolean;
+  is_demo_disabled: boolean;
+  is_repo_disabled: boolean;
 }
