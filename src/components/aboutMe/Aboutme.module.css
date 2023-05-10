@@ -1,0 +1,71 @@
+.wrapper {
+  --mt: clamp(16px, 1vw + 16px, 64px);
+
+  flex: 1;
+  flex-basis: 25%;
+
+  padding: var(--spacing);
+
+  color: var(--paragraph-color);
+
+  background: var(--aside-bg-color);
+}
+
+.sticky {
+  position: sticky;
+  top: calc(var(--spacing) + 6px);
+}
+
+.heading {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+/* ABOUT ME */
+.aboutMeBlock {
+  max-width: 65ch;
+
+  overflow-wrap: break-word;
+  white-space: pre-line;
+
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.aboutMe {
+}
+
+.aboutMe h1 {
+  font-size: 2.375rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  line-height: 1;
+}
+
+.aboutMe p:first-of-type {
+  margin-top: 8px;
+}
+
+/* SKILLS */
+.skillsBlock {
+  margin-top: var(--mt);
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* LINKS */
+.linksBlock {
+  margin-top: var(--mt);
+}
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}

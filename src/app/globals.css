@@ -1,0 +1,216 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* GLOBAL STYLES */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  line-height: calc(1em + 0.725rem);
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+    helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  /*
+    Create a stacking context, without a z-index.
+    This ensures that all portal content (modals and tooltips) will
+    float above the app.
+  */
+  isolation: isolate;
+}
+
+html {
+  /* PALETTES */
+  --deepSapphire-0: 230 58% 82%;
+  --deepSapphire-50: 230 33% 82%;
+  --deepSapphire-100: 230 33% 78%;
+  --deepSapphire-200: 230 33% 68%;
+  --deepSapphire-300: 230 33% 60%;
+  --deepSapphire-400: 230 33% 53%;
+  --deepSapphire-500: 230 33% 48%;
+  --deepSapphire-600: 230 33% 34%;
+  --deepSapphire-700: 230 33% 26%;
+  --deepSapphire-800: 230 33% 21%;
+  --deepSapphire-900: 230 33% 18%;
+  --deepSapphire-950: 230 33% 16%;
+
+  --coca-50: 30 14% 97%;
+  --coca-100: 20 20% 94%;
+  --coca-200: 20 22% 89%;
+  --coca-300: 18 23% 77%;
+  --coca-400: 18 22% 71%;
+  --coca-500: 18 21% 60%;
+  --coca-600: 18 17% 51%;
+  --coca-700: 18 18% 42%;
+  --coca-800: 17 18% 35%;
+  --coca-900: 17 15% 31%;
+  --coca-950: 16 19% 15%;
+
+  --cadet-50: 210 12% 97%;
+  --cadet-100: 216 14% 93%;
+  --cadet-200: 220 14% 87%;
+  --cadet-300: 214 13% 78%;
+  --cadet-400: 217 12% 71%;
+  --cadet-500: 218 12% 60%;
+  --cadet-600: 226 11% 53%;
+  --cadet-700: 226 10% 48%;
+  --cadet-800: 231 9% 40%;
+  --cadet-900: 227 8% 33%;
+  --cadet-950: 233 8% 21%;
+
+  /* BACKGROUND COLORS */
+  --main-bg-color: hsl(var(--deepSapphire-800));
+  --aside-bg-color: hsl(var(--deepSapphire-950));
+  --card-bg-color: hsl(var(--deepSapphire-700));
+  --button-bg-color: hsl(var(--deepSapphire-600));
+  --tag-bg-color: hsl(var(--deepSapphire-600));
+  --flag-bg-color: hsl(var(--deepSapphire-600));
+
+  --button-hover-bg-color: hsl(var(--deepSapphire-500));
+  --button-active-bg-color: hsl(var(--deepSapphire-800));
+  --tag-hover-bg-color: hsl(var(--deepSapphire-500));
+
+  /* TEXT COLORS */
+  --heading-color: hsl(var(--coca-200));
+  --paragraph-color: hsl(var(--deepSapphire-0));
+  --year-color: hsl(var(--cadet-400));
+  --button-color: hsl(var(--deepSapphire-50));
+  --flag-color: hsl(var(--deepSapphire-50));
+  --tag-color: hsl(var(--deepSapphire-50));
+
+  /* MISC. COLORS */
+  --separator-color: hsl(var(--deepSapphire-200) / 15%);
+  --flag-tail-color: hsl(var(--coca-400));
+
+  /* MISC. STUFF */
+  --spacing: clamp(16px, 1vw + 8px, 32px);
+  --radius1: 8px;
+  --radius2: 4px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
