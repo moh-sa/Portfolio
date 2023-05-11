@@ -1,11 +1,11 @@
-import { SVGs } from "../../data/icons";
+import { Icons } from "../../data/icons";
 import Icon from "../Icon/Icon";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
   href: string;
   text: string;
-  icon: keyof typeof SVGs;
+  icon: keyof typeof Icons;
 }
 
 const Button = ({ href, text, icon }: ButtonProps) => {

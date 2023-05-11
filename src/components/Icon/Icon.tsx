@@ -1,8 +1,8 @@
-import { SVGs } from "../../data/icons";
+import { Icons } from "../../data/icons";
 import styles from "./styles.module.css";
 
 interface IconProps {
-  icon: keyof typeof SVGs;
+  icon: keyof typeof Icons;
 }
 
 const Icon = ({ icon }: IconProps) => {
@@ -17,7 +17,7 @@ const Icon = ({ icon }: IconProps) => {
         icon === "demo" ? "16 16" : icon === "resume" ? "22 22" : "24 24"
       }`}
     >
-      {SVGs[icon]}
+      {Icons[icon]}
     </svg>
   );
 };
