@@ -126,9 +126,9 @@ table {
 *:after {
   box-sizing: border-box;
   line-height: calc(1em + 0.725rem);
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+  /* font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
     helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; */
 }
 
 #root {
