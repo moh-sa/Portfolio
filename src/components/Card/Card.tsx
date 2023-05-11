@@ -23,10 +23,10 @@ const Card = ({ ...props }: ProjectType) => {
         <div>
           {/* Title + Year */}
           <div className={styles.linkWrapper}>
-            <a href={props.demoSrc} target="_blank" tabIndex={-1}>
-              <h2 className={styles.title}>{props.title}</h2>
+            <a href={props.demoSrc} className={styles.title} target="_blank">
+              {props.title}
             </a>
-            <h3 className={styles.year}>{props.year}</h3>
+            <span className={styles.year}>{props.year}</span>
             {props.isOriginal && <Flag />}
           </div>
           {/* Description */}
