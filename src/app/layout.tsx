@@ -1,9 +1,15 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import styles from "./layout.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+//Roboto
+//Roboto Slab
+//Montserrat
+//Open Sans
+const roboto = Open_Sans({
+  weight: ["300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
 
 const title = "Mohammed Sobhi Portfolio";
 const description =
@@ -50,7 +56,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang={lang}>
-      <body className={`${inter.className} ${styles.layout}`}>
+      <body className={`${roboto.className} ${styles.layout}`}>
         {children}
         <Analytics />
       </body>
