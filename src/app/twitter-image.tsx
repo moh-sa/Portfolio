@@ -1,7 +1,8 @@
 import OpenGraph from "$/components/OpenGraph/OpenGraph";
 import { ImageResponse } from "next/server";
 
-export const alt = "Mohammed Sobhi Portfolio";
+export const alt =
+  "'Mohammed Sobhi' in light brown and 'Portfolio' in pale sky blue below it on a dark blue background";
 export const size = {
   width: 800,
   height: 400,
