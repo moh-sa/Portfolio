@@ -17,7 +17,7 @@ export interface ProjectType {
   repoSrc?: string;
   imgSrc: StaticImageData | string;
   imgAlt: string;
-  skills: string[];
+  tech: string[];
 }
 
 export const projects: ProjectType[] = [
@@ -30,19 +30,21 @@ export const projects: ProjectType[] = [
     demoSrc: "https://moh-sa.dev",
     repoSrc: "https://github.com/moh-sa/Portfolio",
     imgSrc: portfolio,
-    imgAlt: "",
-    skills: [s.next, s.tailwind, s.og, s.ts],
+    imgAlt:
+      "You are currently here. An Image of this webpage that shows an 'About Me' column on the left and 'My Projects' takes the rest of the page.",
+    tech: [s.next, s.tailwind, s.og, s.ts],
   },
   {
     title: "King's Revenge",
     description:
-      "A platformer game with hit-box and collision detection built entirely with vanilla JavaScript.",
+      "A platformer game with hit-box and collision detection built entirely in vanilla JavaScript.",
     year: 2023,
     demoSrc: "https://kings-revenge.moh-sa.dev",
     repoSrc: "https://github.com/moh-sa/Kings-Revenge",
     imgSrc: platformer,
-    imgAlt: "",
-    skills: [s.js],
+    imgAlt:
+      "The king is wearing his golden crown and light blue cape on red armor, standing in the middle of the swamp.",
+    tech: [s.js],
   },
   {
     title: "Globe",
@@ -51,8 +53,9 @@ export const projects: ProjectType[] = [
     demoSrc: "https://globe-threejs.moh-sa.dev/",
     repoSrc: "https://github.com/moh-sa/globe_threejs",
     imgSrc: globe,
-    imgAlt: "",
-    skills: [s.three, s.gasp],
+    imgAlt:
+      "An image of planet Earth in space and the MENA (Middle East and North Africa) region is shown",
+    tech: [s.three, s.gasp],
   },
   {
     title: "Apple-like Store",
@@ -62,8 +65,9 @@ export const projects: ProjectType[] = [
     demoSrc: "https://apple-store.moh-sa.dev",
     repoSrc: "https://github.com/moh-sa/Apple-Store",
     imgSrc: appleStore,
-    imgAlt: "",
-    skills: [s.next, s.sanity, s.stripe, s.tailwind, s.ts],
+    imgAlt:
+      "A screenshot of an Apple-like store that features an iPhone 14 image on the right and marketing text on the left that says 'iPhone 14 big and bigger'",
+    tech: [s.next, s.sanity, s.stripe, s.tailwind, s.ts],
   },
   {
     title: "proShop",
@@ -73,8 +77,9 @@ export const projects: ProjectType[] = [
     demoSrc: "https://proshop.moh-sa.dev",
     repoSrc: "https://github.com/moh-sa/proShop",
     imgSrc: proShop,
-    imgAlt: "",
-    skills: [
+    imgAlt:
+      "screenshot of the main page with a dark grey navbar, featured project box with an image of PS4, and latest products list.",
+    tech: [
       s.react,
       s.express,
       s.mongo,
@@ -91,14 +96,15 @@ export const projects: ProjectType[] = [
   {
     title: "Memories",
     description:
-      "'Memories' is my first MERN personal project. The project utilized React.js for the front-end and Express.js for the back-end. To ensure security, Access and refresh JWT tokens were implemented for authentication, and account activation was done through email to ensure security.",
+      "Share your precious memories with others and engage with the community through likes and comments. Every user has a profile, an auto-complete search bar, and amazing light and dark modes. 'Memories' is my first MERN personal project, which utilized React.js for the front-end and Express.js for the back-end. To ensure security, account activation is done via email, and authentication is implemented through JWT access and refresh tokens.",
     year: 2022,
     isOriginal: true,
     demoSrc: "https://memories.moh-sa.dev",
     repoSrc: "https://github.com/moh-sa/memories",
     imgSrc: memories,
-    imgAlt: "",
-    skills: [
+    imgAlt:
+      "A screenshot of 'Memories' main page, you will find a white navbar followed by eight memory posts. Each post showcases a beautiful image of a wonderful place along with the user avatar, publish time, number of likes and comments, memory title, and description.",
+    tech: [
       s.react,
       s.express,
       s.mongo,
@@ -121,7 +127,8 @@ export const projects: ProjectType[] = [
     year: 2021,
     isOriginal: true,
     imgSrc: autoCorrection,
-    imgAlt: "",
-    skills: [s.oracle_db, s.oracle_apex, s.bootstrap],
+    imgAlt:
+      "A screenshot of the project that has a black navbar, light blue announcements box, greetings user sentence, and a list of courses in boxes, and each has its unique color and code.",
+    tech: [s.oracle_db, s.oracle_apex, s.bootstrap],
   },
 ];

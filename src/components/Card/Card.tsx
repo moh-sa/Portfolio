@@ -33,10 +33,10 @@ const Card = ({ ...props }: ProjectType) => {
           <p className={styles.description}>{props.description}</p>
         </div>
         <div>
-          {/* Skills */}
+          {/* Techs */}
           <div className={styles.skills}>
-            {props.skills.map((skill, index) => (
-              <Tag key={index} text={skill} />
+            {props.tech.map((tech, index) => (
+              <Tag key={index} text={tech} />
             ))}
           </div>
           {/* Button: github + live demo */}
