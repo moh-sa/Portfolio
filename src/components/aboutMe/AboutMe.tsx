@@ -12,10 +12,9 @@ const AboutMe = () => {
           <div className={styles.aboutMe}>
             <h1>Mohammed Sobhi Alafifi</h1>
             <p>
-              A Computer Engineer obsessed with creating robust web applications
-              that are not only user-friendly but also incredibly easy to
-              access, ensuring that everyone can use and benefit from the
-              exceptional levels of functionality available.
+              A Computer Engineer passionate about crafting user-friendly,
+              highly accessible web applications with exceptional functionality
+              for all.
             </p>
             <p>
               My primary aim is to craft elegant, simple solutions that
