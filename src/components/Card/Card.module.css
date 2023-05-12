@@ -25,9 +25,9 @@
 }
 
 .imageWrapper {
+  --inner-space: 8px;
   overflow: hidden;
-  border-top-left-radius: var(--radius1);
-  border-top-right-radius: var(--radius1);
+  padding: var(--inner-space);
 }
 
 .image {
@@ -35,6 +35,8 @@
   object-fit: cover;
   object-position: top center;
   transform: translateZ(0);
+
+  border-radius: calc(var(--inner-space) / 2);
 }
 
 .body {
