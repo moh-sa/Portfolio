@@ -96,7 +96,7 @@ export const projects: ProjectType[] = [
   {
     title: "Memories",
     description:
-      "Share your precious memories with others and engage with the community through likes and comments. Every user has a profile, an auto-complete search bar, and amazing light and dark modes. 'Memories' is my first MERN personal project, which utilized React.js for the front-end and Express.js for the back-end. To ensure security, account activation is done via email, and authentication is implemented through JWT access and refresh tokens.",
+      "Share your precious memories with others and engage with the community through likes and comments. Every user has a profile, an auto-complete search bar, and amazing light and dark modes. 'Memories' is my first MERN original project, which utilized React.js for the front-end and Express.js for the back-end. To ensure security, account activation is done via email, and authentication is implemented through JWT access and refresh tokens.",
     year: 2022,
     isOriginal: true,
     demoSrc: "https://memories.moh-sa.dev",
