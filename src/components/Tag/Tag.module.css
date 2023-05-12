@@ -10,6 +10,7 @@
   background: var(--tag-bg-color);
 
   transition: background ease-in 500ms;
+  transform: translateZ(0);
 }
 
 .tag:hover,

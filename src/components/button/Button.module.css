@@ -17,6 +17,7 @@
   background-color: var(--button-bg-color);
 
   transition: background-color 600ms;
+  transform: translateZ(0);
 }
 
 .wrapper:hover,
