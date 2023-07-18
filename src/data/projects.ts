@@ -24,7 +24,7 @@ export const projects: ProjectType[] = [
   {
     title: "Portfolio",
     description:
-      "One of my top priorities was developing an accessible portfolio for all users, regardless of any visual limitations they may have. To achieve this goal, I have used color schemes that are friendly for those who are colorblind, and I have made sure to be in compliance with WCAG standards. Utilizing the latest features of Next.js 13 and Native CSS, I have brought my vision to life with a minimalist design that sets my work apart from others.",
+      "My minimalist portfolio is accessible to all users, regardless of their visual limitations, using color schemes that comply with WCAG standards. It is responsive and achieved using only CSS Flexbox and Grid.",
     year: 2023,
     isOriginal: true,
     demoSrc: "https://moh-sa.dev",
