@@ -32,7 +32,7 @@ export const projects: ProjectType[] = [
     imgSrc: portfolio,
     imgAlt:
       "You are currently here. An Image of this webpage that shows an 'About Me' column on the left and 'My Projects' takes the rest of the page.",
-    tech: [s.next, s.tailwind, s.og, s.ts],
+    tech: [s.next, s.css, s.og, s.ts],
   },
   {
     title: "King's Revenge",
