@@ -7,7 +7,7 @@ import portfolio from "../../public/portfolio.webp";
 import proShop from "../../public/proShop.webp";
 import globe from "../../public/globe.webp";
 import platformer from "../../public/platformer.webp";
-
+import breadit from "../../public/breadit.webp";
 export interface ProjectType {
   title: string;
   description: string;
@@ -21,6 +21,29 @@ export interface ProjectType {
 }
 
 export const projects: ProjectType[] = [
+  {
+    title: "Breadit",
+    description:
+      "Breadit is a Reddit clone where users can create and join communities, leave comments, and upvote or downvote posts and comments. Built with Next.js 13 app router and uses interception and parallel routing features. It also utilizes Redis for caching, Next Auth, PlanetScale (MySQL) with Prisma ORM, and TailwindCSS.",
+    year: 2023,
+    isOriginal: false,
+    demoSrc: "https://breadit.moh-sa.dev/https://breadit.moh-sa.dev/",
+    repoSrc: "https://github.com/moh-sa/breadit",
+    imgSrc: breadit,
+    imgAlt:
+      "A screenshot of breadit displaying your feed section with the most recent posts from the communities you have joined.",
+    tech: [
+      s.next,
+      s.redis,
+      s.planetScale,
+      s.prisma,
+      s.next_auth,
+      s.axios,
+      s.zod,
+      s.tailwind,
+      s.shadcn,
+    ],
+  },
   {
     title: "Portfolio",
     description:
