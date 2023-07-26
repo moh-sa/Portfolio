@@ -48,7 +48,7 @@ export const projects: ProjectType[] = [
   {
     title: "Portfolio",
     description:
-      "My minimalist portfolio is accessible to all users, regardless of their visual limitations, using color schemes that comply with WCAG standards. It is responsive and achieved using only CSS Flexbox and Grid.",
+      "A minimalist portfolio that is accessible for all users, regardless of their visual limitations, using color schemes that comply with WCAG standards. It is fully responsive using only CSS Flexbox and Grid.",
     year: 2023,
     isOriginal: true,
     demoSrc: "https://moh-sa.dev",
