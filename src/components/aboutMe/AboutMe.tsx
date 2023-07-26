@@ -12,13 +12,9 @@ const AboutMe = () => {
           <div className={styles.aboutMe}>
             <h1>Mohammed Sobhi Alafifi</h1>
             <p>
-              A Computer Engineer passionate about crafting user-friendly,
-              highly accessible web applications with exceptional functionality
-              for all.
-            </p>
-            <p>
-              My primary aim is to craft elegant, simple solutions that
-              prioritize usability above all else.
+              A Computer Engineer passionate about crafting user-friendly and
+              accessible web applications with exceptional functionality for
+              all.
             </p>
           </div>
         </div>
@@ -28,6 +24,7 @@ const AboutMe = () => {
             <Tag text={s.react} />
             <Tag text={s.next} />
             <Tag text={s.express} />
+            <Tag text={s.sql} />
             <Tag text={s.postgre} />
             <Tag text={s.mongo} />
             <Tag text={s.js} />
