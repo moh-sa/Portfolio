@@ -1,10 +1,10 @@
 export type SkillType = { [key: string]: string };
 
 export const skills: SkillType = {
-  react: "Reactjs",
-  next: "Nextjs",
-  express: "Expressjs",
-  mongo: "mongoDB",
+  react: "React.js",
+  next: "Next.js",
+  express: "Express.js",
+  mongo: "MongoDB",
   mongoose: "Mongoose",
   sql: "SQL",
   postgre: "PostgreSQL",
@@ -16,7 +16,7 @@ export const skills: SkillType = {
   mantine: "Mantine",
   nodemailer: "Nodemailer",
   cloudinary: "Cloudinary",
-  bcrypt: "bcrypt",
+  bcrypt: "Bcrypt",
   uuid: "UUID",
   tailwind: "TailwindCSS",
   css: "Vanilla CSS",
@@ -34,7 +34,7 @@ export const skills: SkillType = {
   next_auth: "Next Auth",
   framer_motion: "Framer Motion",
   og: "Vercel OG Image",
-  three: "Threejs",
+  three: "Three.js",
   gasp: "GASP",
   zod: "Zod",
   redis: "Redis",
