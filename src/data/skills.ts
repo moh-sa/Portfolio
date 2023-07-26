@@ -19,7 +19,7 @@ export const skills: SkillType = {
   bcrypt: "bcrypt",
   uuid: "UUID",
   tailwind: "TailwindCSS",
-  css: "Native CSS",
+  css: "Vanilla CSS",
   js: "JavaScript",
   ts: "Typescript",
   oracle_db: "Oracle DB",
