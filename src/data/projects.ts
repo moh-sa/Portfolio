@@ -42,6 +42,7 @@ export const projects: ProjectType[] = [
       s.zod,
       s.tailwind,
       s.shadcn,
+      s.ts,
     ],
   },
   {
