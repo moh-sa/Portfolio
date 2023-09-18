@@ -13,7 +13,6 @@ const Button = ({ href, text, icon }: ButtonProps) => {
     <a className={styles.wrapper} href={href} target="_blank">
       <Icon icon={icon} />
       {text}
-      {/* TODO: add external link icon */}
     </a>
   );
 };
