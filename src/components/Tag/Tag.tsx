@@ -1,7 +1,7 @@
 import styles from "./Tag.module.css";
 
 const Tag = ({ text }: { text: string }) => {
-  return <button className={styles.tag}>{text}</button>;
+  return <span className={styles.tag}>{text}</span>;
 };
 
 export default Tag;
