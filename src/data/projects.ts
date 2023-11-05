@@ -27,7 +27,7 @@ export const projects: ProjectType[] = [
       "Breadit is a Reddit clone where users can create and join communities, leave comments, and upvote or downvote posts and comments. Built with Next.js 13 app router and uses interception and parallel routing features. It also utilizes Redis for caching, Next Auth, PlanetScale (MySQL) with Prisma ORM, and TailwindCSS.",
     year: 2023,
     isOriginal: false,
-    demoSrc: "https://breadit.moh-sa.dev/https://breadit.moh-sa.dev/",
+    demoSrc: "https://breadit.moh-sa.dev/",
     repoSrc: "https://github.com/moh-sa/breadit",
     imgSrc: breadit,
     imgAlt:
