@@ -23,7 +23,12 @@ const Card = ({ ...props }: ProjectType) => {
         <div>
           {/* Title + Year */}
           <div className={styles.linkWrapper}>
-            <a href={props.demoSrc} className={styles.title} target="_blank">
+            <a
+              href={props.demoSrc}
+              className={styles.title}
+              target="_blank"
+              tabIndex={-1}
+            >
               {props.title}
             </a>
             <span className={styles.year}>{props.year}</span>
