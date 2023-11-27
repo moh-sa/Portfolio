@@ -2,10 +2,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Open_Sans } from "next/font/google";
 import styles from "./layout.module.css";
-//Roboto
-//Roboto Slab
-//Montserrat
-//Open Sans
+
 const roboto = Open_Sans({
   weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
@@ -49,13 +46,11 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  params: { lang },
 }: {
   children: React.ReactNode;
-  params: { lang: string };
 }) {
   return (
-    <html lang={lang}>
+    <html lang="en">
       <body className={`${roboto.className}`}>
         <main className={styles.layout}>{children}</main>
         <Analytics />
