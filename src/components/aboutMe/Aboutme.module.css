@@ -16,8 +16,8 @@
   top: calc(var(--spacing) + 6px);
 }
 
-.heading {
-  margin-bottom: 8px;
+.title {
+  margin-bottom: 26px;
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -36,14 +36,14 @@
 .aboutMe {
 }
 
-.aboutMe h1 {
+.aboutMe .name {
   font-size: 2.375rem;
   font-weight: 600;
   color: var(--heading-color);
   line-height: 1;
 }
 
-.aboutMe p:first-of-type {
+.aboutMe p:last-of-type {
   margin-top: 8px;
 }
 

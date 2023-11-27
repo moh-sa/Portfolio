@@ -5,12 +5,12 @@ import { skills as s } from "$/data/skills";
 
 const AboutMe = () => {
   return (
-    <aside className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <div className={styles.sticky}>
         <div className={styles.aboutMeBlock}>
-          <h2 className={styles.heading}>About Me</h2>
+          <h1 className={styles.title}>About Me</h1>
           <div className={styles.aboutMe}>
-            <h1>Mohammed Sobhi Alafifi</h1>
+            <p className={styles.name}>Mohammed Sobhi Alafifi</p>
             <p>
               A Computer Engineer passionate about crafting user-friendly and
               accessible web applications with exceptional functionality for
@@ -19,7 +19,7 @@ const AboutMe = () => {
           </div>
         </div>
         <div className={styles.skillsBlock}>
-          <h2 className={styles.heading}>Main Skills</h2>
+          <h2 className={styles.title}>Main Skills</h2>
           <div className={styles.skills}>
             <Tag text={s.react} />
             <Tag text={s.next} />
@@ -34,7 +34,7 @@ const AboutMe = () => {
           </div>
         </div>
         <div className={styles.linksBlock}>
-          <h2 className={styles.heading}>Links</h2>
+          <h2 className={styles.title}>Links</h2>
           <div className={styles.links}>
             <Button text="Resume" icon="resume" href="./resume.pdf" />
             <Button
@@ -51,7 +51,7 @@ const AboutMe = () => {
           </div>
         </div>
       </div>
-    </aside>
+    </section>
   );
 };
 
