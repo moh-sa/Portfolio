@@ -16,9 +16,16 @@
   top: calc(var(--spacing) + 6px);
 }
 
-.title {
-  margin-bottom: 26px;
+.baseTitle {
+  margin-bottom: 8px;
   font-size: 1.5rem;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.subTitle {
   font-weight: 400;
 }
 

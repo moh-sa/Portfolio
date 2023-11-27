@@ -8,7 +8,7 @@ const AboutMe = () => {
     <section className={styles.wrapper}>
       <div className={styles.sticky}>
         <div className={styles.aboutMeBlock}>
-          <h1 className={styles.title}>About Me</h1>
+          <h1 className={`${styles.baseTitle} ${styles.title}`}>About Me</h1>
           <div className={styles.aboutMe}>
             <p className={styles.name}>Mohammed Sobhi Alafifi</p>
             <p>
@@ -19,7 +19,9 @@ const AboutMe = () => {
           </div>
         </div>
         <div className={styles.skillsBlock}>
-          <h2 className={styles.title}>Main Skills</h2>
+          <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>
+            Main Skills
+          </h2>
           <div className={styles.skills}>
             <Tag text={s.react} />
             <Tag text={s.next} />
@@ -34,7 +36,7 @@ const AboutMe = () => {
           </div>
         </div>
         <div className={styles.linksBlock}>
-          <h2 className={styles.title}>Links</h2>
+          <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>Links</h2>
           <div className={styles.links}>
             <Button text="Resume" icon="resume" href="./resume.pdf" />
             <Button

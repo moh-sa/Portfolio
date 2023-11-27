@@ -10,14 +10,12 @@
 }
 
 .title {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .cardsWrapper {
-  margin-top: 30px;
-
   /* https://css-tricks.com/an-auto-filling-css-grid-with-max-columns/ */
   --grid-column-count: 2;
   --grid-item--min-width: 253px;
