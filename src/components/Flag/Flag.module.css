@@ -1,12 +1,12 @@
 .flag {
   position: absolute;
-  top: 18px;
+  top: 12px;
   right: 0px;
-  height: 28px;
+  /* height: 28px; */
   line-height: 28px;
   padding: 0 10px;
-  font-size: 0.8rem;
-  font-weight: 800;
+  /* font-size: 0.8rem; */
+  /* font-weight: 800; */
 
   color: var(--flag-color);
   background-color: var(--flag-bg-color);
