@@ -22,7 +22,7 @@ const AboutMe = () => {
           <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>
             Main Skills
           </h2>
-          <div className={styles.skills}>
+          <ul className={styles.skills}>
             <Tag text={s.react} />
             <Tag text={s.next} />
             <Tag text={s.express} />
@@ -33,7 +33,7 @@ const AboutMe = () => {
             <Tag text={s.ts} />
             <Tag text={s.css} />
             <Tag text={s.tailwind} />
-          </div>
+          </ul>
         </div>
         <div className={styles.linksBlock}>
           <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>Links</h2>

@@ -9,6 +9,14 @@
   color: var(--paragraph-color);
 
   background: var(--aside-bg-color);
+
+  border-radius: 8px 0px 0px 8px;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    border-radius: 0;
+  }
 }
 
 .sticky {
