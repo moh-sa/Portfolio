@@ -51,8 +51,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className}`}>
-        <main className={styles.layout}>{children}</main>
+      <body className={`${roboto.className} ${styles.body}`}>
+        <main className={styles.main}>{children}</main>
         <Analytics />
       </body>
     </html>

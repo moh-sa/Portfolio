@@ -1,6 +1,19 @@
-.layout {
+.body {
+  max-width: 1600px;
+  margin: auto;
+
+  background: hsl(230 33% 26%);
+}
+
+.main {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
 
-  background: linear-gradient(45deg, hsl(230 33% 16%), hsl(230 33% 21%));
+@media (max-width: 1024px) {
+  .main {
+    margin: 0;
+  }
 }
