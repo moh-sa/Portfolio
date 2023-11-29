@@ -17,6 +17,8 @@
 .imageWrapper {
   --inner-space: 8px;
   overflow: hidden;
+
+  padding-top: var(--inner-space);
   padding-right: var(--inner-space);
   padding-left: var(--inner-space);
 }
