@@ -3,17 +3,18 @@ import Icon from "../Icon/Icon";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
-  href: string;
+  href?: string;
   text: string;
   icon: keyof typeof Icons;
+  as?: "button" | "a" | "span";
 }
 
-const Button = ({ href, text, icon }: ButtonProps) => {
+const Button = ({ href, text, icon, as: Tag = "a" }: ButtonProps) => {
   return (
-    <a className={styles.wrapper} href={href} target="_blank">
+    <Tag className={styles.wrapper} href={href} target="_blank">
       <Icon icon={icon} />
       {text}
-    </a>
+    </Tag>
   );
 };
 
