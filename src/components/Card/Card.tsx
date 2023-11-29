@@ -49,69 +49,13 @@ const Card = ({ ...props }: ProjectType) => {
         {props.repoSrc && (
           <Button icon="github" href={props.repoSrc} text="Code" />
         )}
+
+        {!props.demoSrc && !props.repoSrc && (
+          <Button as="span" icon="notAllowed" text="Not Available" />
+        )}
       </footer>
     </article>
   );
 };
 
 export default Card;
-
-function OldCard({ ...props }: ProjectType) {
-  return (
-    <article className={styles.wrapper}>
-      {/* Image / Cover */}
-      <div className={styles.imageWrapper}>
-        <Image
-          className={styles.image}
-          src={props.imgSrc}
-          alt={props.imgAlt}
-          style={{ width: "100%", height: "100%" }}
-          placeholder="blur"
-          loading="lazy"
-        />
-      </div>
-      <div className={styles.body}>
-        <div>
-          {/* Title + Year */}
-          <header className={styles.linkWrapper}>
-            <h1>
-              <a
-                href={props.demoSrc}
-                className={styles.title}
-                target="_blank"
-                tabIndex={-1}
-              >
-                {props.title}
-              </a>
-            </h1>
-            <h2 className={styles.year}>{props.year}</h2>
-            {props.isOriginal && <Flag />}
-          </header>
-          <section>
-            {/* Description */}
-            <p className={styles.description}>{props.description}</p>
-            {/* Techs */}
-            <ul className={styles.techs}>
-              {props.tech.map((tech, index) => (
-                <Tag key={index} text={tech} />
-              ))}
-            </ul>
-          </section>
-        </div>
-        <footer>
-          {/* Button: github + live demo */}
-          {props.demoSrc && props.repoSrc && (
-            <div className={styles.buttons}>
-              {props.demoSrc && (
-                <Button icon="demo" href={props.demoSrc} text="Live demo" />
-              )}
-              {props.repoSrc && (
-                <Button icon="github" href={props.repoSrc} text="Code" />
-              )}
-            </div>
-          )}
-        </footer>
-      </div>
-    </article>
-  );
-}
