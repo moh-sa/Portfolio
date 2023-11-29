@@ -8,8 +8,8 @@
 .main {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 @media (max-width: 1024px) {
