@@ -11,11 +11,9 @@ const Icon = ({ icon }: IconProps) => {
       className={styles.icon}
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 ${
-        icon === "demo" ? "16 16" : icon === "resume" ? "22 22" : "24 24"
-      }`}
+      viewBox={`0 0 ${Icons[icon].viewBox}`}
     >
-      {Icons[icon]}
+      {Icons[icon].path}
     </svg>
   );
 };
