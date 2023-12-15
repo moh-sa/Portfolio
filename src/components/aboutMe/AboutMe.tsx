@@ -1,19 +1,28 @@
-import Tag from "../Tag/Tag";
-import Button from "../button/Button";
-import styles from "./Aboutme.module.css";
-import { skills as s } from "$/data/skills";
+import Tag from '../Tag/Tag';
+import Link from '../link/Link';
+import styles from './Aboutme.module.css';
+import { skills as s } from '$/data/skills';
 
 const AboutMe = () => {
   return (
-    <section className={styles.wrapper}>
+    <section
+      aria-labelledby='aboutMe'
+      className={styles.wrapper}
+    >
       <div className={styles.sticky}>
         <div className={styles.aboutMeBlock}>
-          <h1 className={`${styles.baseTitle} ${styles.title}`}>About Me</h1>
+          <h1
+            id='aboutMe'
+            className={`${styles.baseTitle} ${styles.title}`}
+          >
+            About Me
+          </h1>
           <div className={styles.aboutMe}>
-            <p className={styles.name}>Mohammed Sobhi Alafifi</p>
+            <p className={styles.name}>Mohammed Sobhi</p>
             <p>
-              A Computer Engineer passionate about crafting user-friendly and
-              accessible web applications with exceptional functionality.
+              A Computer Engineer passionate about crafting
+              user-friendly and accessible web applications with
+              exceptional functionality.
             </p>
           </div>
         </div>
@@ -32,23 +41,35 @@ const AboutMe = () => {
             <Tag text={s.ts} />
             <Tag text={s.css} />
             <Tag text={s.tailwind} />
+            <Tag text={s.wcag} />
+            <Tag text={s.a11y} />
           </ul>
         </div>
         <div className={styles.linksBlock}>
-          <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>Links</h2>
+          <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>
+            Links
+          </h2>
           <div className={styles.links}>
-            <Button text="Resume" icon="resume" href="./resume.pdf" />
-            <Button
-              text="Github"
-              icon="github"
-              href="https://github.com/moh-sa"
+            <Link
+              text='Resume'
+              icon='resume'
+              href='./resume.pdf'
             />
-            <Button
-              text="LinkedIn"
-              icon="linkedin"
-              href="https://www.linkedin.com/in/moh-sa"
+            <Link
+              text='Github'
+              icon='github'
+              href='https://github.com/moh-sa'
             />
-            <Button text="Email" icon="email" href="mailto:msa@moh-sa.dev" />
+            <Link
+              text='LinkedIn'
+              icon='linkedin'
+              href='https://www.linkedin.com/in/moh-sa'
+            />
+            <Link
+              text='Email'
+              icon='email'
+              href='mailto:msa@moh-sa.dev'
+            />
           </div>
         </div>
       </div>
