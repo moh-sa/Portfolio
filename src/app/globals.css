@@ -112,7 +112,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -213,4 +213,10 @@ html,
 body,
 #root {
   height: 100%;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--heading-color);
+  outline-offset: 4px;
 }
