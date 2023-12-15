@@ -8,7 +8,8 @@
   color: var(--paragraph-color);
   background: var(--main-bg-color);
 
-  border-radius: 0px 8px 8px 0px;
+  border-start-end-radius: 8px;
+  border-end-end-radius: 8px;
 }
 
 @media (max-width: 1024px) {
@@ -37,7 +38,10 @@
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
+    minmax(
+      max(var(--grid-item--min-width), var(--grid-item--max-width)),
+      1fr
+    )
   );
 
   grid-gap: var(--grid-layout-gap);
