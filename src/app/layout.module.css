@@ -1,13 +1,14 @@
 .body {
-  max-width: 1600px;
-  margin: auto;
-
   background: hsl(230 33% 26%);
 }
 
 .main {
   display: flex;
   flex-wrap: wrap;
+
+  max-width: 1600px;
+
+  margin: auto;
   margin-top: 32px;
   margin-bottom: 32px;
 }
