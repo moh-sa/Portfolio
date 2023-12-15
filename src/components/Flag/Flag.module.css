@@ -1,18 +1,17 @@
 .flag {
   position: absolute;
-  top: 12px;
-  right: 0px;
-  /* height: 28px; */
+  inset-block-start: 12px;
+  inset-inline: auto;
+  inset-inline-end: 0px;
+
   line-height: 28px;
   padding: 0 10px;
-  /* font-size: 0.8rem; */
-  /* font-weight: 800; */
 
   color: var(--flag-color);
   background-color: var(--flag-bg-color);
 
   border-radius: var(--radius1);
-  border-top-left-radius: 99999px;
-  border-bottom-left-radius: 99999px;
-  box-shadow: inset -4px 0px 0px 0px var(--flag-tail-color);
+  border-start-start-radius: 9999999px;
+  border-end-start-radius: 9999999px;
+  border-inline-end: 4px solid var(--flag-tail-color);
 }

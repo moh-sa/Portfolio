@@ -6,7 +6,8 @@
   border-radius: var(--radius1);
   background-color: var(--card-bg-color);
 
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .wrapper > * {
@@ -48,22 +49,18 @@
   position: relative;
 }
 
-.headerWrapper > h1 {
+.headerWrapper > h2 {
   display: inline-block;
-  margin-right: 18px;
-}
-
-.headerWrapper > h1 > a {
+  margin-inline-end: 18px;
   font-size: 2.2rem;
   font-weight: 500;
 
   color: var(--heading-color);
-  text-decoration: none;
 
   transform: translateZ(0);
 }
 
-.headerWrapper > h2 {
+.headerWrapper > time {
   display: inline-block;
 
   font-size: 1.1rem;
@@ -113,18 +110,6 @@
   margin-top: 8px;
   padding-top: 16px;
   padding-bottom: 16px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 18px;
-
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--separator-color);
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
