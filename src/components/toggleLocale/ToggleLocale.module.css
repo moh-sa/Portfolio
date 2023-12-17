@@ -3,7 +3,9 @@
   inset-inline-end: 0px;
   inset-block-start: 0px;
 
+  width: 32px;
   height: 32px;
+  font-size: 14px;
   border-radius: 9999px;
   border: none;
   padding: 5px 6px;
