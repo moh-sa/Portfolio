@@ -14,7 +14,10 @@ const AboutMe = () => {
     >
       <div className={styles.sticky}>
         <div className={styles.aboutMeBlock}>
-          <ToggleLocale />
+          <ToggleLocale
+            text={t('AboutMe.toggleLocale')}
+            aria={t('AboutMe.ariaLabelToggleLocale')}
+          />
           <h1
             id='aboutMe'
             className={`${styles.baseTitle} ${styles.title}`}
