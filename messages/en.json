@@ -7,7 +7,9 @@
     "AboutMe": {
       "title": "About Me",
       "name": "Mohammed Sobhi",
-      "description": "A Computer Engineer passionate about crafting user-friendly and accessible web applications with exceptional functionality"
+      "description": "A Computer Engineer passionate about crafting user-friendly and accessible web applications with exceptional functionality",
+      "toggleLocale": "AR",
+      "ariaLabelToggleLocale": "Switch to the Arabic version"
     },
     "Skills": {
       "title": "Skills"
