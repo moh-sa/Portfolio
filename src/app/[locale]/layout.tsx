@@ -6,8 +6,9 @@ import {
   getTranslations,
   unstable_setRequestLocale,
 } from 'next-intl/server';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
+import { Metadata } from 'next';
 
 const roboto = Open_Sans({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -34,7 +35,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params: { locale },
-}: Omit<Props, 'children'>) {
+}: Omit<Props, 'children'>): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   return {
@@ -61,11 +62,13 @@ export async function generateMetadata({
       title: t('title'),
       description: t('description'),
       url: 'https://moh-sa.dev',
+      type: 'website',
     },
     twitter: {
       title: t('title'),
       description: t('description'),
       creator: '@Tno_MSA',
+      card: 'summary_large_image',
     },
   };
 }
