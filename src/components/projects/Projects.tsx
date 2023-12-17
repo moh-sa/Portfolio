@@ -1,8 +1,10 @@
 import Card from '../Card/Card';
 import styles from './Projects.module.css';
 import { projects } from '$/data/projects';
+import { useTranslations } from 'next-intl';
 
 const Projects = () => {
+  const t = useTranslations('MyProjects');
   return (
     <section
       aria-labelledby='myProjects'
@@ -12,7 +14,7 @@ const Projects = () => {
         id='myProjects'
         className={styles.title}
       >
-        My Projects
+        {t('title')}
       </h1>
       <div className={styles.cardsWrapper}>
         {projects.map((p, i) => (
