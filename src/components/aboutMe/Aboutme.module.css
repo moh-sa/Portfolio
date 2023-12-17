@@ -40,6 +40,8 @@
 
 /* ABOUT ME */
 .aboutMeBlock {
+  position: relative;
+
   max-width: 65ch;
 
   overflow-wrap: break-word;

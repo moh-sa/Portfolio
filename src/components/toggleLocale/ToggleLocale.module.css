@@ -1,32 +1,32 @@
-.wrapper {
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
-  flex-basis: 197px;
-  gap: 8px;
 
-  font-size: 1.25rem;
-  text-decoration: none;
+  position: absolute;
+  inset-inline-end: 0px;
+  inset-block-start: 0px;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
   border: none;
-  border-radius: var(--radius1);
-  padding: 0.4rem 0.8rem;
-  text-transform: capitalize;
+  padding: 10px 6px;
+  cursor: pointer;
 
   color: var(--button-color);
   background-color: var(--button-bg-color);
 
   transition: background-color 600ms;
-  transform: translateZ(0);
 }
 
-.wrapper:hover,
-.wrapper:focus-visible {
+.button:hover,
+.button:focus-visible {
   background-color: var(--button-hover-bg-color);
   transition: background-color 150ms;
 }
 
-.wrapper:active {
+.button:active {
   background-color: hsl(230 33% 0% / 1);
   transition: background-color 150ms;
 }

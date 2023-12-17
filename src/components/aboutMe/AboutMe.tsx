@@ -2,8 +2,11 @@ import Tag from '../Tag/Tag';
 import Link from '../link/Link';
 import styles from './Aboutme.module.css';
 import { skills as s } from '$/data/skills';
+import ToggleLocale from '../toggleLocale/ToggleLocale';
+import { useTranslations } from 'next-intl';
 
 const AboutMe = () => {
+  const t = useTranslations('AboutMe');
   return (
     <section
       aria-labelledby='aboutMe'
@@ -11,24 +14,22 @@ const AboutMe = () => {
     >
       <div className={styles.sticky}>
         <div className={styles.aboutMeBlock}>
+          <ToggleLocale />
           <h1
             id='aboutMe'
             className={`${styles.baseTitle} ${styles.title}`}
           >
-            About Me
+            {t('AboutMe.title')}
           </h1>
+
           <div className={styles.aboutMe}>
-            <p className={styles.name}>Mohammed Sobhi</p>
-            <p>
-              A Computer Engineer passionate about crafting
-              user-friendly and accessible web applications with
-              exceptional functionality.
-            </p>
+            <p className={styles.name}>{t('AboutMe.name')}</p>
+            <p>{t('AboutMe.description')}</p>
           </div>
         </div>
         <div className={styles.skillsBlock}>
           <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>
-            Main Skills
+            {t('Skills.title')}
           </h2>
           <ul className={styles.skills}>
             <Tag text={s.react} />
@@ -47,26 +48,26 @@ const AboutMe = () => {
         </div>
         <div className={styles.linksBlock}>
           <h2 className={`${styles.baseTitle} ${styles.subTitle}`}>
-            Links
+            {t('Contact.title')}
           </h2>
           <div className={styles.links}>
             <Link
-              text='Resume'
+              text={t('Contact.links.resume')}
               icon='resume'
               href='./resume.pdf'
             />
             <Link
-              text='Github'
+              text={t('Contact.links.github')}
               icon='github'
               href='https://github.com/moh-sa'
             />
             <Link
-              text='LinkedIn'
+              text={t('Contact.links.linkedin')}
               icon='linkedin'
               href='https://www.linkedin.com/in/moh-sa'
             />
             <Link
-              text='Email'
+              text={t('Contact.links.email')}
               icon='email'
               href='mailto:msa@moh-sa.dev'
             />

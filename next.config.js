@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
+const withNextIntl = require('next-intl/plugin')();
 
-const nextConfig = {
+module.exports = withNextIntl({
   experimental: {
     appDir: true,
   },
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ['res.cloudinary.com'],
   },
-};
-
-module.exports = nextConfig;
+});

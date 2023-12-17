@@ -4,8 +4,11 @@ import Link from '../link/Link';
 import Flag from '../Flag/Flag';
 import Tag from '../Tag/Tag';
 import { ProjectType } from '$/data/projects';
+import { useTranslations } from 'next-intl';
 
 const Card = ({ ...props }: ProjectType) => {
+  const t = useTranslations('MyProjects');
+
   return (
     <article className={styles.wrapper}>
       {/* 🖼️ Cover */}
@@ -13,7 +16,7 @@ const Card = ({ ...props }: ProjectType) => {
         <Image
           className={styles.image}
           src={props.imgSrc}
-          alt={props.imgAlt}
+          alt={t(`projects.${props.title}.alt`)}
           style={{ width: '100%', height: '100%' }}
           placeholder='blur'
           loading='lazy'
@@ -22,14 +25,20 @@ const Card = ({ ...props }: ProjectType) => {
 
       {/* 🌟 Title + 🗓️ Date + 🏷️ Original */}
       <header className={styles.headerWrapper}>
-        <h2>{props.title}</h2>
-        <time dateTime={props.year.toString()}>{props.year}</time>
-        {props.isOriginal && <Flag />}
+        <h2>{t(`projects.${props.title}.title`)}</h2>
+        <time dateTime={t(`projects.${props.title}.year`)}>
+          {t(`projects.${props.title}.year`)}
+        </time>
+        {t(`projects.${props.title}.isOriginal`) === '1' && (
+          <Flag text={t('original')} />
+        )}
       </header>
 
       {/* 📝 Description + 🛠️ Technologies */}
       <section className={styles.sectionWrapper}>
-        <p className={styles.description}>{props.description}</p>
+        <p className={styles.description}>
+          {t(`projects.${props.title}.description`)}
+        </p>
         <ul className={styles.techs}>
           {props.tech.map((tech, index) => (
             <Tag
@@ -46,14 +55,14 @@ const Card = ({ ...props }: ProjectType) => {
           <Link
             icon='demo'
             href={props.demoSrc}
-            text='Live demo'
+            text={t('demo')}
           />
         )}
         {props.repoSrc && (
           <Link
             icon='github'
             href={props.repoSrc}
-            text='Code'
+            text={t('code')}
           />
         )}
 
