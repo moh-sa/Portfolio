@@ -1,5 +1,10 @@
 import { getRequestConfig } from 'next-intl/server';
+import { redirect } from 'next/navigation';
 
 export default getRequestConfig(async ({ locale }) => ({
-  messages: (await import(`../messages/${locale}.json`)).default,
+  messages: (
+    await (locale === 'en'
+      ? import('../messages/en.json')
+      : import(`../messages/${locale}.json`))
+  ).default,
 }));
