@@ -15,12 +15,12 @@
       "title": "Skills"
     },
     "Contact": {
-      "title": "Links",
+      "title": "Get in touch",
       "links": {
         "resume": "Resume",
         "github": "Github",
         "linkedin": "LinkedIn",
-        "email": "Get in touch"
+        "email": "Email"
       }
     }
   },

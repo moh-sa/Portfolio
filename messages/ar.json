@@ -15,12 +15,12 @@
       "title": "المهارات"
     },
     "Contact": {
-      "title": "روابط",
+      "title": "تواصل معي",
       "links": {
         "resume": "السيرة الذاتية",
         "github": "Github",
         "linkedin": "LinkedIn",
-        "email": "تواصل معي"
+        "email": "البريد الالكتروني"
       }
     }
   },
