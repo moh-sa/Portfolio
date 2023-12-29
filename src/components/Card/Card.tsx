@@ -29,9 +29,9 @@ const Card = ({ ...props }: ProjectType) => {
         <time dateTime={t(`projects.${props.title}.year`)}>
           {t(`projects.${props.title}.year`)}
         </time>
-        {t(`projects.${props.title}.isOriginal`) === '1' && (
+        {/* {t(`projects.${props.title}.isOriginal`) === '1' && (
           <Flag text={t('original')} />
-        )}
+        )} */}
       </header>
 
       {/* 📝 Description + 🛠️ Technologies */}
