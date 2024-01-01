@@ -75,7 +75,7 @@
       "memories": {
         "title": "Memories",
         "year": "2022",
-        "description": "Share your precious memories with others and engage with the community through likes and comments. Every user has a profile, an auto-complete search bar, and amazing light and dark modes. 'Memories' is my first MERN original project, which utilized React.js for the front-end and Express.js for the back-end. To ensure security, account activation is done via email, and authentication is implemented through JWT access and refresh tokens.",
+        "description": "Share Images of your precious Memories and engage with the community through likes and comments. This was my first project using the MERN stack with React.js and Express.js. Implemented access and refresh JWT tokens, email verification, and next-gen image format.",
         "alt": "Eight posts with large images, user details, links, and comments.",
         "isOriginal": "1"
       },
