@@ -1,7 +1,7 @@
 import OpenGraph from '$/components/OpenGraph/OpenGraph';
 import { ImageResponse } from 'next/server';
 
-export const alt = "Mohammed Sobhi's Portfolio";
+export const alt = "Mohammed Sobhi's portfolio";
 export const size = {
   width: 1200,
   height: 630,
