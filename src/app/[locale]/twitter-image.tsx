@@ -1,14 +1,13 @@
-import OpenGraph from "$/components/OpenGraph/OpenGraph";
-import { ImageResponse } from "next/server";
+import OpenGraph from '$/components/OpenGraph/OpenGraph';
+import { ImageResponse } from 'next/server';
 
-export const alt =
-  "'Mohammed Sobhi' in light brown and 'Portfolio' in pale sky blue below it on a dark blue background";
+export const alt = "Mohammed Sobhi's portfolio";
 export const size = {
-  width: 800,
-  height: 400,
+  width: 1200,
+  height: 630,
 };
-export const contentType = "image/png";
-export const runtime = "edge";
+export const contentType = 'image/png';
+export const runtime = 'edge';
 
 export default function og() {
   return new ImageResponse(<OpenGraph />, {
