@@ -57,7 +57,7 @@ const AboutMe = () => {
             <Link
               text={t('Contact.links.resume')}
               icon='resume'
-              href='./resume.pdf'
+              href='https://flowcv.com/resume/j0p5digipv'
             />
             <Link
               text={t('Contact.links.github')}
