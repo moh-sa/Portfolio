@@ -1,10 +1,9 @@
-import Image from 'next/image';
-import styles from './Card.module.css';
-import Link from '../link/Link';
-import Flag from '../Flag/Flag';
-import Tag from '../Tag/Tag';
 import { ProjectType } from '$/data/projects';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Tag from '../Tag/Tag';
+import Link from '../link/Link';
+import styles from './Card.module.css';
 
 const Card = ({ ...props }: ProjectType) => {
   const t = useTranslations('MyProjects');
@@ -26,9 +25,9 @@ const Card = ({ ...props }: ProjectType) => {
       {/* 🌟 Title + 🗓️ Date + 🏷️ Original */}
       <header className={styles.headerWrapper}>
         <h2>{t(`projects.${props.title}.title`)}</h2>
-        <time dateTime={t(`projects.${props.title}.year`)}>
+        {/* <time dateTime={t(`projects.${props.title}.year`)}>
           {t(`projects.${props.title}.year`)}
-        </time>
+        </time> */}
         {/* {t(`projects.${props.title}.isOriginal`) === '1' && (
           <Flag text={t('original')} />
         )} */}
