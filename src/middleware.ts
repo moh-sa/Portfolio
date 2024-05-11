@@ -1,6 +1,5 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { skipRoutes } from "~/config";
 import { Locales } from "~/types/locales";
 import { getLocaleType } from "~/utils/";
 
@@ -8,7 +7,6 @@ const locales = Object.values(Locales);
 
 export default clerkMiddleware((auth, request) => {
   const { pathname } = request.nextUrl;
-  if (skipRoutes.includes(pathname)) return NextResponse.next();
 
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
@@ -23,9 +21,18 @@ export default clerkMiddleware((auth, request) => {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
-    "/((?!_next).*)",
-    // Optional: only run on root (/) URL
-    "/",
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - dashboard (dashboard page)
+     * - favicon.ico (favicon file)
+     * - robots.txt (robots file)
+     * - sitemap.xml (sitemap file)
+     * - og_en.png (open graph image for English)
+     * - og_ar.png (open graph image for Arabic)
+     */
+    "/((?!api|_next/static|_next/image|dashboard|favicon.ico|robots.txt|sitemap.xml|og_en.png|og_ar.png).*)",
   ],
 };
