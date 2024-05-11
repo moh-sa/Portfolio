@@ -11,6 +11,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -90,3 +91,19 @@ export const projectsTechsRelations = relations(projectTechs, ({ one }) => ({
     references: [projects.id],
   }),
 }));
+
+// Types
+export const techSchema = {
+  insert: createInsertSchema(techs),
+  select: createSelectSchema(techs),
+};
+
+export const projectSchema = {
+  insert: createInsertSchema(projects),
+  select: createSelectSchema(projects),
+};
+
+export const projectTechSchema = {
+  insert: createInsertSchema(projectTechs),
+  select: createSelectSchema(projectTechs),
+};
