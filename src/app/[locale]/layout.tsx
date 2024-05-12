@@ -15,17 +15,13 @@ const cairo = Cairo({
   variable: "--font-sans",
 });
 
-// TODO: check if needed
-// export async function generateStaticParams() {
-//   return [{ locale: "en" }, { locale: "ar" }];
-// }
 type params = {
   children: React.ReactNode;
   params: {
     locale: Locales;
   };
 };
-export default function RootLayout({ children, params }: params) {
+export default function LocaleLayout({ children, params }: params) {
   const localeConfig = {
     locale: params.locale === Locales.ENGLISH ? "en" : "ar",
     dir: params.locale === Locales.ENGLISH ? "ltr" : "rtl",
