@@ -2,13 +2,17 @@ import Link from "next/link";
 import { getLocaleFile } from "~/locales/locales";
 import { Locales } from "~/types";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }];
+}
+
 type params = {
   params: {
     locale: Locales;
   };
 };
 
-export default async function HomePage({ params }: params) {
+export default async function LocalePage({ params }: params) {
   const loc = await getLocaleFile(params.locale);
   const arrow = params.locale === Locales.ENGLISH ? "→" : "←";
 
