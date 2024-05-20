@@ -29,6 +29,7 @@ const AR = {
     emptyState: "يبدو أنني نسيت إضافة بعض الأعمال.",
     demoLabel: "معاينة",
     repoLabel: "الكود",
+    noButtonsLabel: "غير متوفر",
   },
   general: {
     localeToggle: "English",

@@ -30,6 +30,7 @@ const EN = {
     emptyState: "It looks like I forgot to populate my portfolio.",
     demoLabel: "Live Demo",
     repoLabel: "Code",
+    noButtonsLabel: "Not Available",
   },
   general: {
     localeToggle: "العربية",
