@@ -1,7 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
-import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
-import { metaInfo } from "~/config/metadata";
+import { getLocaleFile } from "~/locales/locales";
 import { Locales } from "~/types";
 import { getOpenGraphData } from "~/utils/metadata";
 
@@ -31,13 +30,15 @@ export default function LocaleLayout({ children, params }: params) {
     </html>
   );
 }
-
-export function generateMetadata({ params }: Pick<params, "params">): Metadata {
-  const locale = params.locale === Locales.ENGLISH ? "en" : "ar";
-  const { og, tw } = getOpenGraphData({ locale: locale });
+export async function generateMetadata({ params }: Pick<params, "params">) {
+  const loc = await getLocaleFile(params.locale);
+  const { og, tw } = getOpenGraphData({
+    localeData: loc.metadata,
+    locale: params.locale,
+  });
   return {
-    title: metaInfo[locale].title,
-    description: metaInfo[locale].description,
+    title: loc.metadata.title,
+    description: loc.metadata.description,
     openGraph: { ...og },
     twitter: { ...tw },
   };
