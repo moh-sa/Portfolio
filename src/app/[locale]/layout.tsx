@@ -1,14 +1,9 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Cairo, Roboto_Mono } from "next/font/google";
+import { Cairo } from "next/font/google";
 import { metaInfo } from "~/config/metadata";
 import { Locales } from "~/types";
 import { getOpenGraphData } from "~/utils/metadata";
-
-const roboto = Roboto_Mono({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -25,12 +20,11 @@ export default function LocaleLayout({ children, params }: params) {
   const localeConfig = {
     locale: params.locale === Locales.ENGLISH ? "en" : "ar",
     dir: params.locale === Locales.ENGLISH ? "ltr" : "rtl",
-    fontFamily:
-      params.locale === Locales.ENGLISH ? roboto.variable : cairo.variable,
+    font: cairo.variable,
   };
   return (
     <html lang={localeConfig.locale} dir={localeConfig.dir}>
-      <body className={`font-sans ${localeConfig.fontFamily} bg-navy`}>
+      <body className={`font-sans ${localeConfig.font} bg-navy`}>
         {children}
         <Analytics />
       </body>
