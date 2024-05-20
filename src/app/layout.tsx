@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { keywords } from "~/config/metadata";
+import { keywords } from "~/data";
 import { env } from "~/env";
 import "~/styles/globals.css";
 
