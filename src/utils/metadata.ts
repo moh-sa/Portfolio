@@ -1,14 +1,21 @@
-import { metaInfo } from "~/config";
+import { type TLocales } from "~/locales/locales";
+import { type Locales } from "~/types";
 
-export function getOpenGraphData({ locale }: { locale: "en" | "ar" }) {
+export function getOpenGraphData({
+  localeData,
+  locale,
+}: {
+  localeData: TLocales["metadata"];
+  locale: Locales;
+}) {
   return {
     og: {
-      title: metaInfo[locale].title,
-      description: metaInfo[locale].description,
-      url: metaInfo[locale].url,
+      title: localeData.title,
+      description: localeData.description,
+      url: localeData.url,
       images: {
-        url: metaInfo[locale].imgUrl,
-        alt: metaInfo[locale].imgAlt,
+        url: localeData.ogImgUrl,
+        alt: localeData.ogImgAlt,
         width: 1200,
         height: 630,
       },
@@ -17,9 +24,9 @@ export function getOpenGraphData({ locale }: { locale: "en" | "ar" }) {
     },
     tw: {
       card: "summary_large_image",
-      title: metaInfo[locale].title,
-      description: metaInfo[locale].description,
-      images: metaInfo[locale].imgUrl,
+      title: localeData.title,
+      description: localeData.description,
+      images: localeData.ogImgUrl,
     },
   };
 }
