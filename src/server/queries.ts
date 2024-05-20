@@ -52,8 +52,6 @@ export const createNewProject = cache(
         .values({ ...newProject })
         .returning({ id: projects.id });
 
-      revalidatePath("/[locale]", "page");
-
       return newProjectID;
     } catch (error) {
       console.log(error);
@@ -99,6 +97,8 @@ export const createNewProjectTech = cache(
         .insert(projectTechs)
         .values({ projectID, techID });
 
+      revalidatePath("/[locale]", "page");
+
       return newProjectTechID;
     } catch (error) {
       console.log(error);
@@ -120,6 +120,9 @@ export const deleteProject = cache(async (projectID: number) => {
   try {
     await db.delete(projectTechs).where(eq(projectTechs.projectID, projectID));
     await db.delete(projects).where(eq(projects.id, projectID));
+
+    revalidatePath("/[locale]", "page");
+
     return { message: "Project deleted successfully" };
   } catch (error) {
     console.log(error);
