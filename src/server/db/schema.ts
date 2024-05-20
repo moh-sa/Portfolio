@@ -19,13 +19,12 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-// TODO: change "test" to "portfolio"
-export const createTable = pgTableCreator((name) => `test_${name}`);
+export const createTable = pgTableCreator((name) => `portfolio_${name}`);
 
 // Data tables
 export const techs = createTable("techs", {
   id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }).notNull().default(""),
+  name: varchar("name", { length: 256 }).unique().notNull().default(""),
 });
 
 export const projects = createTable("projects", {
@@ -53,7 +52,7 @@ export const projects = createTable("projects", {
 
   repoURL: varchar("repo_url", { length: 1024 }).notNull().default(""),
 
-  createdAr: timestamp("created_at").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 // many-to-many relation between projects and techs table
@@ -92,18 +91,18 @@ export const projectsTechsRelations = relations(projectTechs, ({ one }) => ({
   }),
 }));
 
-// Types
-export const techSchema = {
+// Zod Types
+export const techZodSchema = {
   insert: createInsertSchema(techs),
   select: createSelectSchema(techs),
 };
 
-export const projectSchema = {
+export const projectZodSchema = {
   insert: createInsertSchema(projects),
   select: createSelectSchema(projects),
 };
 
-export const projectTechSchema = {
+export const projectTechZodSchema = {
   insert: createInsertSchema(projectTechs),
   select: createSelectSchema(projectTechs),
 };
