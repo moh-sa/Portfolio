@@ -1,7 +1,7 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { relations } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import {
   integer,
   pgTableCreator,
@@ -22,12 +22,7 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 export const createTable = pgTableCreator((name) => `portfolio_${name}`);
 
 // Data tables
-export const techs = createTable("techs", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }).unique().notNull().default(""),
-});
-
-export const projects = createTable("projects", {
+export const projectsSchema = createTable("projects", {
   id: serial("id").primaryKey(),
 
   titleEN: varchar("title_en", { length: 256 }).notNull().default(""),
@@ -41,6 +36,11 @@ export const projects = createTable("projects", {
   descriptionAR: varchar("description_ar", { length: 1024 })
     .notNull()
     .default(""),
+
+  techStack: text("tech_stack")
+    .array()
+    .notNull()
+    .default(sql`ARRAY[]::text[]`),
 
   imageURL: text("image_url").notNull().default(""),
 
