@@ -9,10 +9,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log("🚨🚨🚨");
-  console.log(env.NODE_ENV);
-  console.log("🚨🚨🚨");
-
   return children;
 }
 
