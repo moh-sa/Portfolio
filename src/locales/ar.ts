@@ -5,8 +5,8 @@ const AR = {
     title: "أبرز أعمال محمد صبحي",
     description:
       "مهندس كمبيوتر شغوف بصناعة تطبيقات ويب ذات وظائف استثنائية وسهلة الاستخدام",
-    url: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/ar`,
-    ogImgUrl: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/og_ar.png`,
+    url: `${env.NEXT_PUBLIC_URL}/ar`,
+    ogImgUrl: `${env.NEXT_PUBLIC_URL}/og_ar.png`,
     ogImgAlt: "آخر أعمال محمد صبحي",
   },
   profile: {

@@ -9,6 +9,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log("🚨🚨🚨");
+  console.log(env.NODE_ENV);
+  console.log("🚨🚨🚨");
+
   return children;
 }
 
@@ -20,10 +24,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   keywords: [...keywords],
   alternates: {
-    canonical: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}`,
+    canonical: `${env.NEXT_PUBLIC_URL}`,
     languages: {
-      en: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/en`,
-      ar: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/ar`,
+      en: `${env.NEXT_PUBLIC_URL}/en`,
+      ar: `${env.NEXT_PUBLIC_URL}/ar`,
     },
   },
 };
