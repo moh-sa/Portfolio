@@ -1,3 +1,2 @@
-import { Locales } from "./locales";
-
-export { Locales };
+export * from "./createProject";
+export * from "./locales";
