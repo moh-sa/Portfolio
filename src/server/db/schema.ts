@@ -3,9 +3,7 @@
 
 import { sql } from "drizzle-orm";
 import {
-  integer,
   pgTableCreator,
-  primaryKey,
   serial,
   text,
   timestamp,
@@ -68,3 +66,4 @@ export const projectZodSchema = z.object({
   imageAltAR: z.string().min(1).max(1024),
   demoURL: z.string().min(1).max(1024),
   repoURL: z.string().min(1).max(1024),
+});
