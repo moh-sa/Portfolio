@@ -9,16 +9,16 @@ const cairo = Cairo({
   variable: "--font-sans",
 });
 
-type params = {
+type TProps = {
   children: React.ReactNode;
   params: {
     locale: Locales;
   };
 };
-export default function LocaleLayout({ children, params }: params) {
+export default function LocaleLayout({ children, params: { locale } }: TProps) {
   const localeConfig = {
-    locale: params.locale === Locales.ENGLISH ? "en" : "ar",
-    dir: params.locale === Locales.ENGLISH ? "ltr" : "rtl",
+    locale: locale === Locales.ENGLISH ? "en" : "ar",
+    dir: locale === Locales.ENGLISH ? "ltr" : "rtl",
     font: cairo.variable,
   };
   return (
@@ -30,11 +30,11 @@ export default function LocaleLayout({ children, params }: params) {
     </html>
   );
 }
-export async function generateMetadata({ params }: Pick<params, "params">) {
-  const loc = await getLocaleFile(params.locale);
+export async function generateMetadata({ params: { locale } }: TProps) {
+  const loc = await getLocaleFile(locale);
   const { og, tw } = getOpenGraphData({
     localeData: loc.metadata,
-    locale: params.locale,
+    locale: locale,
   });
   return {
     title: loc.metadata.title,
