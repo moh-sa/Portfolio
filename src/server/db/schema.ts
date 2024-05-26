@@ -11,7 +11,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { z } from "zod";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -55,54 +55,16 @@ export const projectsSchema = createTable("projects", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// many-to-many relation between projects and techs table
-export const projectTechs = createTable(
-  "projectTechs",
-  {
-    techID: integer("tech_id")
-      .notNull()
-      .references(() => techs.id),
-    projectID: integer("project_id")
-      .notNull()
-      .references(() => projects.id),
-  },
-  (table) => ({
-    primaryKey: primaryKey({ columns: [table.techID, table.projectID] }),
-  }),
-);
-
-// relations
-export const techsRelations = relations(techs, ({ many }) => ({
-  projectTechs: many(projectTechs),
-}));
-
-export const projectsRelations = relations(projects, ({ many }) => ({
-  projectTechs: many(projectTechs),
-}));
-
-export const projectsTechsRelations = relations(projectTechs, ({ one }) => ({
-  tech: one(techs, {
-    fields: [projectTechs.techID],
-    references: [techs.id],
-  }),
-  project: one(projects, {
-    fields: [projectTechs.projectID],
-    references: [projects.id],
-  }),
-}));
-
-// Zod Types
-export const techZodSchema = {
-  insert: createInsertSchema(techs),
-  select: createSelectSchema(techs),
-};
-
-export const projectZodSchema = {
-  insert: createInsertSchema(projects),
-  select: createSelectSchema(projects),
-};
-
-export const projectTechZodSchema = {
-  insert: createInsertSchema(projectTechs),
-  select: createSelectSchema(projectTechs),
-};
+// Zod Schema
+export const projectZodSchema = z.object({
+  id: z.number().positive(),
+  titleEN: z.string().min(1).max(256),
+  titleAR: z.string().min(1).max(256),
+  descriptionEN: z.string().min(1).max(1024),
+  descriptionAR: z.string().min(1).max(1024),
+  techStack: z.array(z.string()).min(1),
+  imageURL: z.string().min(1),
+  imageAltEN: z.string().min(1).max(1024),
+  imageAltAR: z.string().min(1).max(1024),
+  demoURL: z.string().min(1).max(1024),
+  repoURL: z.string().min(1).max(1024),
