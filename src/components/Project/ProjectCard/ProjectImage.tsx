@@ -12,7 +12,7 @@ export function ProjectImage({ src, alt }: TProps) {
         width={448}
         height={220}
         alt={alt}
-        className="aspect-video max-h-56 w-full rounded-t-[0.25rem] object-cover"
+        className="aspect-video max-h-56 w-full rounded-t-[0.25rem] object-cover object-top"
       />
     </figure>
   );
