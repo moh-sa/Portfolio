@@ -20,10 +20,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   keywords: [...keywords],
   alternates: {
-    canonical: `${env.NEXT_PUBLIC_URL}`,
+    canonical: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}`,
     languages: {
-      en: `${env.NEXT_PUBLIC_URL}/en`,
-      ar: `${env.NEXT_PUBLIC_URL}/ar`,
+      en: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/en`,
+      ar: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/ar`,
     },
   },
 };

@@ -6,8 +6,8 @@ const EN = {
     title: "Mohammed Sobhi's Portfolio",
     description:
       "A Computer Engineer passionate about crafting user-friendly and accessible web applications with exceptional functionality",
-    url: `${env.NEXT_PUBLIC_URL}/en`,
-    ogImgUrl: `${env.NEXT_PUBLIC_URL}/og_en.png`,
+    url: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/en`,
+    ogImgUrl: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/og_en.png`,
     ogImgAlt: "Mohammed Sobhi Portfolio",
   },
   profile: {

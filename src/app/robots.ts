@@ -8,6 +8,6 @@ export default function robot(): MetadataRoute.Robots {
       allow: ["/", "/en", "/ar"],
       disallow: "/dashboard",
     },
-    sitemap: `${env.NEXT_PUBLIC_URL}/sitemap.xml`,
+    sitemap: `${env.NODE_ENV === "production" ? env.NEXT_PUBLIC_URL : "https://" + env.NEXT_PUBLIC_VERCEL_URL}/sitemap.xml`,
   };
 }
