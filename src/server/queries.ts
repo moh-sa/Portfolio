@@ -1,146 +1,292 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { PostgresError } from "postgres";
 import { cache } from "react";
 import "server-only";
 import { ZodError } from "zod";
 import { db } from "./db";
-import {
-  projectTechs,
-  projectZodSchema,
-  projects,
-  techZodSchema,
-  techs,
-} from "./db/schema";
+import { projectZodSchema, projectsSchema } from "./db/schema";
 
-export const getAllTechs = cache(async () => {
+// TODO: use better error handling approach
+export async function createNewProject({
+  newProject,
+}: {
+  newProject: typeof projectsSchema.$inferInsert;
+}) {
   try {
-    return await db.query.projects.findMany();
+    const parsedData = projectZodSchema.parse(newProject);
+
+    await db.insert(projectsSchema).values({ ...parsedData });
+
+    revalidatePath("/[locale]", "page");
+    revalidatePath("/dashboard", "page");
+
+    return {
+      status: "success",
+    };
   } catch (error) {
-    console.log(error);
-    throw new Error("Something went wrong while getting all Techs", {
-      cause: error,
-    });
+    console.log("🚨 error in createNewProject", error);
+    if (error instanceof ZodError) {
+      const errorMap = error.flatten().fieldErrors;
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+          map: errorMap,
+        },
+      };
+    } else if (error instanceof PostgresError) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else if (error instanceof Error) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else {
+      return {
+        status: "failure",
+        error: {
+          message: "Something went wrong while creating a new project",
+          cause: "",
+        },
+      };
+    }
   }
-});
+}
 
 export const getAllProjects = cache(async () => {
   try {
-    return await db.query.projects.findMany({
-      with: {
-        projectTechs: {
-          with: {
-            tech: true,
-          },
-        },
-      },
+    const projects = await db.query.projectsSchema.findMany({
+      orderBy: [desc(projectsSchema.createdAt)],
     });
+    return {
+      status: "success",
+      payload: projects,
+    };
   } catch (error) {
-    console.log(error);
-    throw new Error("Something went wrong while getting all projects", {
-      cause: error,
-    });
+    console.log("🚨 error in getAllProjects", error);
+    if (error instanceof ZodError) {
+      const errorMap = error.flatten().fieldErrors;
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+          map: errorMap,
+        },
+      };
+    } else if (error instanceof PostgresError) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else if (error instanceof Error) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else {
+      return {
+        status: "failure",
+        error: {
+          message: "Something went wrong while getting all projects",
+          cause: "",
+        },
+      };
+    }
   }
 });
 
-export const createNewProject = cache(
-  async (project: typeof projectZodSchema.insert._type) => {
+export const getSingleProject = cache(
+  async ({ projectID }: { projectID: number }) => {
     try {
-      const newProject = projectZodSchema.insert.parse(project);
-
-      const [newProjectID] = await db
-        .insert(projects)
-        .values({ ...newProject })
-        .returning({ id: projects.id });
-
-      return newProjectID;
+      const project = await db.query.projectsSchema.findFirst({
+        where: eq(projectsSchema.id, projectID),
+      });
+      return {
+        status: "success",
+        payload: project,
+      };
     } catch (error) {
-      console.log(error);
+      console.log("🚨 error in getSingleProject", error);
       if (error instanceof ZodError) {
-        throw new Error(error.message, { cause: error.cause });
-      } else {
-        throw new Error("Something went wrong while creating a new project", {
-          cause: error,
-        });
-      }
-    }
-  },
-);
-
-export const createNewTech = cache(
-  async (tech: typeof techZodSchema.insert._type) => {
-    try {
-      const newTech = techZodSchema.insert.parse(tech);
-
-      const [newTechID] = await db
-        .insert(techs)
-        .values({ ...newTech })
-        .returning({ id: techs.id });
-
-      return newTechID;
-    } catch (error) {
-      console.log(error);
-      if (error instanceof ZodError) {
-        throw new Error(error.message, { cause: error.cause });
-      } else {
-        throw new Error("Something went wrong while creating a new tech", {
-          cause: error,
-        });
-      }
-    }
-  },
-);
-
-export const createNewProjectTech = cache(
-  async (projectID: number, techID: number) => {
-    try {
-      const [newProjectTechID] = await db
-        .insert(projectTechs)
-        .values({ projectID, techID });
-
-      revalidatePath("/[locale]", "page");
-
-      return newProjectTechID;
-    } catch (error) {
-      console.log(error);
-      if (error instanceof ZodError) {
-        throw new Error(error.message, { cause: error.cause });
-      } else {
-        throw new Error(
-          "Something went wrong while creating a new project tech",
-          {
-            cause: error,
+        const errorMap = error.flatten().fieldErrors;
+        return {
+          status: "failure",
+          error: {
+            message: error.message,
+            cause: error.cause,
+            map: errorMap,
           },
-        );
+        };
+      } else if (error instanceof PostgresError) {
+        return {
+          status: "failure",
+          error: {
+            message: error.message,
+            cause: error.cause,
+          },
+        };
+      } else if (error instanceof Error) {
+        return {
+          status: "failure",
+          error: {
+            message: error.message,
+            cause: error.cause,
+          },
+        };
+      } else {
+        return {
+          status: "failure",
+          error: {
+            message: "Something went wrong while getting a single project",
+            cause: "",
+          },
+        };
       }
     }
   },
 );
 
-export const deleteProject = cache(async (projectID: number) => {
+export async function updateSingleProject({
+  updatedProject,
+}: {
+  updatedProject: typeof projectsSchema.$inferInsert;
+}) {
   try {
-    await db.delete(projectTechs).where(eq(projectTechs.projectID, projectID));
-    await db.delete(projects).where(eq(projects.id, projectID));
+    const parsedData = projectZodSchema.parse(updatedProject);
+
+    const isProjectExists = await getSingleProject({
+      projectID: parsedData.id,
+    });
+
+    if (!isProjectExists) {
+      console.log("🚨 project doesn't exist");
+      throw new Error(`Project with ID: ${parsedData.id} not found`);
+    }
+
+    await db
+      .update(projectsSchema)
+      .set({ ...parsedData })
+      .where(eq(projectsSchema.id, parsedData.id));
 
     revalidatePath("/[locale]", "page");
+    revalidatePath("/dashboard", "page");
 
-    return { message: "Project deleted successfully" };
+    return {
+      status: "success",
+    };
   } catch (error) {
-    console.log(error);
-    throw new Error("Something went wrong while getting all projects", {
-      cause: error,
-    });
+    console.log("🚨 error in updateSingleProject", error);
+    if (error instanceof ZodError) {
+      const errorMap = error.flatten().fieldErrors;
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+          map: errorMap,
+        },
+      };
+    } else if (error instanceof PostgresError) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else if (error instanceof Error) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else {
+      return {
+        status: "failure",
+        error: {
+          message: "Something went wrong while updating a project",
+          cause: "",
+        },
+      };
+    }
   }
-});
+}
 
-export const deleteTech = cache(async (techID: number) => {
+export async function deleteProject(projectID: number) {
   try {
-    await db.delete(projectTechs).where(eq(projectTechs.techID, techID));
-    await db.delete(techs).where(eq(techs.id, techID));
-    return { message: "Tech deleted successfully" };
-  } catch (error) {
-    console.log(error);
-    throw new Error("Something went wrong while getting all projects", {
-      cause: error,
+    const project = await db.query.projectsSchema.findFirst({
+      where: eq(projectsSchema.id, projectID),
     });
+
+    if (!project) {
+      console.log("🚨 project doesn't exist");
+      throw new Error(`Project with ID: ${projectID} not found`);
+    }
+
+    await db.delete(projectsSchema).where(eq(projectsSchema.id, projectID));
+
+    revalidatePath("/[locale]", "page");
+    revalidatePath("/dashboard", "page");
+
+    return {
+      status: "success",
+    };
+  } catch (error) {
+    console.log("🚨 error in deleteProject", error);
+    if (error instanceof ZodError) {
+      const errorMap = error.flatten().fieldErrors;
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+          map: errorMap,
+        },
+      };
+    } else if (error instanceof PostgresError) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else if (error instanceof Error) {
+      return {
+        status: "failure",
+        error: {
+          message: error.message,
+          cause: error.cause,
+        },
+      };
+    } else {
+      return {
+        status: "failure",
+        error: {
+          message: `Something went wrong while deleting a project with ID: ${projectID}`,
+          cause: "",
+        },
+      };
+    }
   }
-});
+}
