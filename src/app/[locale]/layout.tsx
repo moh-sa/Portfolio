@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Cairo } from "next/font/google";
 import { getLocaleFile } from "~/locales/locales";
 import { Locales } from "~/types";
@@ -26,6 +27,7 @@ export default function LocaleLayout({ children, params: { locale } }: TProps) {
       <body className={`font-sans ${localeConfig.font} bg-navy`}>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
