@@ -6,7 +6,7 @@ type TProps = {
 };
 export function ProjectImage({ src, alt }: TProps) {
   return (
-    <figure className="relative aspect-video p-1 pb-0">
+    <figure className="relative p-1 pb-0">
       <Image
         src={src}
         width={448}
