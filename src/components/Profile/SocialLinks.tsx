@@ -9,7 +9,7 @@ export async function SocialLinks({ data }: TProps) {
     <ul className="space-y-2">
       {data.map((link, index) => (
         <li key={`${index}-${link.label}`}>
-          <LinkButton profile url={link.url}>
+          <LinkButton as="a" primary url={link.url}>
             <Icon icon={link.icon} />
             {link.label}
           </LinkButton>

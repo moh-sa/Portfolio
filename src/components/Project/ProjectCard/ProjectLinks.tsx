@@ -12,19 +12,19 @@ export function ProjectLinks({ demoURL, repoURL, localeData }: TProps) {
     <footer className="flex flex-wrap items-center justify-center gap-2 p-1">
       {/* 🚫 empty state 🚫 */}
       {demoURL.length === 0 && repoURL.length === 0 && (
-        <LinkButton url="" disabled>
+        <LinkButton as="div">
           <Icon icon={Empty} />
           {localeData.noButtonsLabel}
         </LinkButton>
       )}
       {demoURL.length > 0 && (
-        <LinkButton url={demoURL}>
+        <LinkButton as="a" url={demoURL}>
           <Icon icon={Compass} />
           {localeData.demoLabel}
         </LinkButton>
       )}
       {repoURL.length > 0 && (
-        <LinkButton url={repoURL}>
+        <LinkButton as="a" url={repoURL}>
           <Icon icon={Code} />
           {localeData.repoLabel}
         </LinkButton>
