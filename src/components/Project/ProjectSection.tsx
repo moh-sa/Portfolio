@@ -27,31 +27,34 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
       </div>
 
       {/* 🚫 empty state 🚫 */}
-      {projects.length === 0 && (
-        <div className="flex flex-col items-center justify-center gap-2 pb-9 text-center lg:pb-0">
-          <Icon icon={XCircle} size={64} />
-          <div className="text-4xl">{localeData.emptyState}</div>
-        </div>
-      )}
+      {projects.payload === undefined ||
+        (projects.payload.length === 0 && (
+          <div className="flex flex-col items-center justify-center gap-2 pb-9 text-center lg:pb-0">
+            <Icon icon={XCircle} size={64} />
+            <div className="text-4xl">{localeData.emptyState}</div>
+          </div>
+        ))}
 
       {/* ✨ projects container ✨ */}
-      {projects.length > 0 && (
+      {projects.payload !== undefined && projects.payload.length > 0 && (
         <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 md:gap-6">
-          {projects.map((project, index) => {
+          {projects.payload.map((project, index) => {
             const isEnglish = localeType === Locales.ENGLISH;
+
             const header = {
               title: isEnglish ? project.titleEN : project.titleAR,
               description: isEnglish
                 ? project.descriptionEN
                 : project.descriptionAR,
             };
+
             const img = {
               src: project.imageURL,
               alt: isEnglish ? project.imageAltEN : project.imageAltAR,
             };
-            const techStack = project.projectTechs.map(
-              (tech) => tech.tech.name,
-            );
+
+            const techStack = project.techStack;
+
             const links = {
               demo: project.demoURL,
               repo: project.repoURL,
