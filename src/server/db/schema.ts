@@ -3,6 +3,7 @@
 
 import { sql } from "drizzle-orm";
 import {
+  boolean,
   pgTableCreator,
   serial,
   text,
@@ -24,13 +25,11 @@ export const projectsSchema = createTable("projects", {
   id: serial("id").primaryKey(),
 
   titleEN: varchar("title_en", { length: 256 }).notNull().default(""),
-
   titleAR: varchar("title_ar", { length: 256 }).notNull().default(""),
 
   descriptionEN: varchar("description_en", { length: 1024 })
     .notNull()
     .default(""),
-
   descriptionAR: varchar("description_ar", { length: 1024 })
     .notNull()
     .default(""),
@@ -41,14 +40,14 @@ export const projectsSchema = createTable("projects", {
     .default(sql`ARRAY[]::text[]`),
 
   imageURL: text("image_url").notNull().default(""),
-
   imageAltEN: varchar("image_alt_en", { length: 1024 }).notNull().default(""),
-
   imageAltAR: varchar("image_alt_ar", { length: 1024 }).notNull().default(""),
 
   demoURL: varchar("demo_url", { length: 1024 }).notNull().default(""),
-
   repoURL: varchar("repo_url", { length: 1024 }).notNull().default(""),
+
+  isOriginal: boolean("is_original").notNull().default(false),
+  hidden: boolean("hidden").notNull().default(false),
 
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -66,4 +65,6 @@ export const projectZodSchema = z.object({
   imageAltAR: z.string().min(1).max(1024),
   demoURL: z.string().min(1).max(1024),
   repoURL: z.string().min(1).max(1024),
+  isOriginal: z.boolean().default(false),
+  hidden: z.boolean().default(false),
 });
