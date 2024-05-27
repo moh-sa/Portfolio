@@ -7,11 +7,11 @@ type TProps = {
 };
 export function ProjectActionButton({ isEdit, projectID }: TProps) {
   const commonStyles =
-    "flex w-full items-center justify-center gap-2 rounded capitalize transition-colors duration-500 ease-in hover:duration-150 hover:ease-out px-2 py-1 text-sm font-medium";
+    "flex w-full items-center justify-center gap-2 rounded px-4 py-2 capitalize transition-colors duration-300 ease-in hover:duration-75 hover:ease-out text-sm font-medium";
   if (isEdit) {
     return (
       <Link
-        className={`${commonStyles} hover:white flex-[2] bg-black text-white hover:bg-white hover:text-black`}
+        className={`${commonStyles} bg-navy-700 hover:bg-navy-500 flex-[2] text-white`}
         href={`/dashboard/edit/${projectID}`}
       >
         Edit
@@ -25,7 +25,7 @@ export function ProjectActionButton({ isEdit, projectID }: TProps) {
     return (
       <form action={handleProjectDelete}>
         <button
-          className={`${commonStyles} flex-1 bg-red-200 text-red-500 hover:bg-red-600/90 hover:text-white`}
+          className={`${commonStyles} flex-1 bg-red-400 text-white hover:bg-red-500`}
           type="submit"
         >
           Delete
