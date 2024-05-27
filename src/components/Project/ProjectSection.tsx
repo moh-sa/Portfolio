@@ -17,7 +17,7 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
 
   return (
     <section
-      className={`relative z-[1] flex-grow overflow-hidden rounded-ee-md rounded-es-md bg-navy-dark p-4 text-indigo-300 lg:basis-3/4 lg:rounded-es-none lg:rounded-se-md lg:p-6 ${backgroundImage}`}
+      className={`bg-navy-600 relative z-[1] flex-grow overflow-hidden rounded-ee-md rounded-es-md p-4 text-indigo-300 lg:basis-3/4 lg:rounded-es-none lg:rounded-se-md lg:p-6 ${backgroundImage}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <CategoryHeading text={localeData.heading} />
