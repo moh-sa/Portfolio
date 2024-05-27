@@ -24,7 +24,7 @@ export default function LocaleLayout({ children, params: { locale } }: TProps) {
   return (
     <html lang={localeConfig.locale} dir={localeConfig.dir}>
       <body className={`font-sans ${localeConfig.font} bg-navy-500`}>
-        <main className="md:outline-navy-400 container mx-auto flex flex-col md:my-4 md:rounded-md md:outline md:outline-4 md:drop-shadow-md lg:my-8 lg:flex lg:min-h-[calc(100dvh-64px)] lg:flex-row">
+        <main className="xl:outline-navy-400 container mx-auto flex flex-col lg:flex lg:min-h-[calc(100dvh-64px)] lg:flex-row xl:my-8 xl:rounded-md xl:outline xl:outline-4 xl:drop-shadow-md">
           {children}
         </main>
         <Analytics />
