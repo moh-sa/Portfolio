@@ -53,7 +53,7 @@ export function ProjectForm({ heading, project, formAction }: TProps) {
 
         {/* // TODO: refactor this and other similar looking buttons into one component*/}
         <button
-          className="hover:white flex w-full items-center justify-center gap-2 rounded bg-black px-4 py-2 capitalize text-white transition-colors duration-500 ease-in hover:bg-white hover:text-black hover:duration-150 hover:ease-out"
+          className="flex w-full items-center justify-center gap-2 rounded bg-black px-4 py-2 capitalize text-white transition-colors duration-500 ease-in hover:bg-white hover:text-black hover:duration-150 hover:ease-out"
           type="submit"
         >
           Submit
