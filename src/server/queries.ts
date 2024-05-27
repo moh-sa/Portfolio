@@ -14,7 +14,10 @@ export async function createNewProject({
   newProject: typeof projectsSchema.$inferInsert;
 }) {
   try {
-    const parsedData = projectZodSchema.parse(newProject);
+    const customNewProjectSchema = projectZodSchema.extend({
+      id: projectZodSchema.shape.id.optional(),
+    });
+    const parsedData = customNewProjectSchema.parse(newProject);
 
     await db.insert(projectsSchema).values({ ...parsedData });
 
