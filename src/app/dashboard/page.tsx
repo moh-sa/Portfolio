@@ -35,7 +35,7 @@ export default async function DashboardPage() {
         {projects?.payload?.map((project, index) => (
           <article
             key={`${index}-${project.id}`}
-            className="flex min-h-full max-w-md flex-col justify-between gap-2 rounded-lg bg-navy-darker shadow-md"
+            className="bg-navy-800 flex min-h-full max-w-md flex-col justify-between gap-2 rounded-lg shadow-md"
           >
             <section className="space-y-2">
               <ProjectImage src={project.imageURL} alt={project.imageAltEN} />

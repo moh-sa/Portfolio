@@ -11,7 +11,7 @@ export function ToggleLocale({ localeType }: TProps) {
 
   return (
     <Link
-      className="flex flex-row-reverse items-center justify-center gap-1 rounded-full bg-obsidian-900 px-3 py-1 text-white hover:bg-obsidian-950"
+      className="bg-navy-900 hover:bg-navy-950 flex flex-row-reverse items-center justify-center gap-1 rounded-full px-3 py-1 text-white"
       href={`${isEnglish ? "/ar" : "/en"}`}
     >
       <Icon icon={Translate} size={20} />

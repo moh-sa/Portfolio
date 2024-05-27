@@ -8,7 +8,7 @@ export function ProjectHeader({ title, description }: TProps) {
       <h3 className="border-b border-[#494979] text-4xl font-medium capitalize text-stone-300 rtl:pb-4">
         {title}
       </h3>
-      <p className="max-w-prose hyphens-auto text-justify text-xl text-navy-light">
+      <p className="text-navy-300 max-w-prose hyphens-auto text-justify text-xl">
         {description}
       </p>
     </hgroup>

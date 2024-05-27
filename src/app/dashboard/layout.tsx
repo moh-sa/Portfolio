@@ -17,7 +17,7 @@ export default async function DashboardLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`font-sans ${cairo.variable}`}>
-          <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-navy to-navy-dark py-8">
+          <main className="to-navy-600 from-navy-500 flex min-h-screen flex-col items-center justify-center bg-gradient-to-b py-8">
             <SignedIn>
               <UserButton />
             </SignedIn>
