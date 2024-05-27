@@ -17,7 +17,7 @@ export default async function EditProjectPage({ params: { id } }: TProps) {
     const projectDetails = new Map<string, string | string[]>();
 
     formData.forEach((value, key) => {
-      if (!key.includes("$ACTION_ID") && typeof value === "string") {
+      if (typeof value === "string") {
         if (key === "techStack") {
           const techStack = value.split(",").map((tech) => tech.trim());
           projectDetails.set("techStack", techStack);
