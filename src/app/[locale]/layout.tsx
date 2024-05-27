@@ -24,7 +24,7 @@ export default function LocaleLayout({ children, params: { locale } }: TProps) {
   };
   return (
     <html lang={localeConfig.locale} dir={localeConfig.dir}>
-      <body className={`font-sans ${localeConfig.font} bg-navy`}>
+      <body className={`font-sans ${localeConfig.font} bg-navy-500`}>
         {children}
         <Analytics />
         <SpeedInsights />
