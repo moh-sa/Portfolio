@@ -1,17 +1,15 @@
-import { PlusCircle } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
-import {
-  BadgeGroup,
-  Icon,
-  LinkButton,
-  ProjectActionButton,
-} from "~/components";
-import { ProjectHeader } from "~/components/Project/ProjectCard/ProjectHeader";
-import { ProjectImage } from "~/components/Project/ProjectCard/ProjectImage";
-import { getAllProjects } from "~/server/queries";
+import { NotePencil, PlusCircle, Trash } from "@phosphor-icons/react/dist/ssr";
+import { Anchor, Button, Icon, ProjectCard } from "~/components";
+import { deleteProject, getAllProjects } from "~/server/queries";
 
+// TODO: refactor into smaller components
 export default async function DashboardPage() {
   const projects = await getAllProjects();
+
+  async function handleProjectDelete({ projectID }: { projectID: number }) {
+    "use server";
+    await deleteProject(projectID);
+  }
 
   return (
     <>
@@ -19,10 +17,10 @@ export default async function DashboardPage() {
         <h1 className="text-center text-4xl font-extrabold text-white">
           My Projects
         </h1>
-        <LinkButton as={Link} url="/dashboard/add">
-          <Icon icon={PlusCircle} size={24} />
+        <Anchor href="/dashboard/add" variant="ghost">
+          <Icon icon={PlusCircle} />
           Add Project
-        </LinkButton>
+        </Anchor>
       </div>
 
       <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 md:gap-6">
@@ -31,28 +29,43 @@ export default async function DashboardPage() {
             <div>{projects.error?.message}</div>
           ))}
 
-        {/* TODO: refactor this to use the same component as the main page */}
-        {projects?.payload?.map((project, index) => (
-          <article
-            key={`${index}-${project.id}`}
-            className="bg-navy-900 flex min-h-full max-w-md flex-col justify-between gap-2 rounded-lg shadow-md"
-          >
-            <section className="space-y-2">
-              <ProjectImage src={project.imageURL} alt={project.imageAltEN} />
-              <ProjectHeader
-                title={project.titleEN}
-                description={project.descriptionEN}
-              />
-            </section>
-            <section className="space-y-2">
-              <BadgeGroup techStack={project.techStack} />
-              <footer className="flex flex-wrap items-center justify-center gap-2 p-1">
-                <ProjectActionButton isEdit projectID={project.id} />
-                <ProjectActionButton projectID={project.id} />
-              </footer>
-            </section>
-          </article>
-        ))}
+        {projects?.payload?.map((project, index) => {
+          const deleteAction = handleProjectDelete.bind(null, {
+            projectID: project.id,
+          });
+          return (
+            <ProjectCard
+              key={`${index}-${project.id}-${project.titleEN}`}
+              header={{
+                title: project.titleEN,
+                description: project.descriptionEN,
+              }}
+              img={{ src: project.imageURL, alt: project.imageAltEN }}
+              techStack={project.techStack}
+            >
+              <>
+                <Anchor
+                  href={`/dashboard/edit/${project.id}`}
+                  variant="secondary"
+                  className="flex-[3]"
+                >
+                  <Icon icon={NotePencil} size={20} />
+                  Edit
+                </Anchor>
+                <form action={deleteAction}>
+                  <Button
+                    type="submit"
+                    variant="destructive"
+                    className="flex-1"
+                  >
+                    <Icon icon={Trash} size={20} />
+                    Delete
+                  </Button>
+                </form>
+              </>
+            </ProjectCard>
+          );
+        })}
       </div>
     </>
   );
