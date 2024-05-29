@@ -2,13 +2,13 @@ import { Badge } from "./Badge";
 
 type TProps = {
   techStack: string[];
-  profile?: boolean;
+  isProfile?: boolean;
 };
-export function BadgeGroup({ techStack, profile }: TProps) {
+export function BadgeGroup({ techStack, isProfile }: TProps) {
   return (
-    <ul className={`flex flex-wrap gap-1 ${!profile && "px-4"}`}>
+    <ul className={`flex flex-wrap gap-1 ${!isProfile && "px-4"}`}>
       {techStack.map((tech, index) => (
-        <Badge profile={profile} key={index} text={tech} />
+        <Badge isProfile={isProfile} key={index} text={tech} />
       ))}
     </ul>
   );

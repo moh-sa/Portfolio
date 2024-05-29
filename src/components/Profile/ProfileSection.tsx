@@ -27,7 +27,7 @@ export async function ProfileSection({ localeType, localeData }: TProps) {
         {/* ✨ Skills ✨ */}
         <div>
           <CategoryHeading text={localeData.skills.heading} />
-          <BadgeGroup profile techStack={localeData.skills.stack} />
+          <BadgeGroup isProfile techStack={localeData.skills.stack} />
         </div>
 
         {/* ✨ Social Links ✨ */}
