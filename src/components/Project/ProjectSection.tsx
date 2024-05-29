@@ -1,5 +1,11 @@
-import { XCircle } from "@phosphor-icons/react/dist/ssr";
-import { CategoryHeading, Icon, ProjectCard, ToggleLocale } from "~/components";
+import { Code, Compass, Empty, XCircle } from "@phosphor-icons/react/dist/ssr";
+import {
+  Anchor,
+  CategoryHeading,
+  Icon,
+  ProjectCard,
+  ToggleLocale,
+} from "~/components";
 import { type TLocales } from "~/locales/locales";
 import { getAllProjects } from "~/server/queries";
 import { Locales } from "~/types";
@@ -8,6 +14,8 @@ type TProps = {
   localeType: Locales;
   localeData: TLocales["projects"];
 };
+
+// TODO: refactor into smaller components
 export async function ProjectSection({ localeType, localeData }: TProps) {
   const projects = await getAllProjects();
 
@@ -26,6 +34,7 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
         </span>
       </div>
 
+      {/* // TODO: refactor this */}
       {/* 🚫 empty state 🚫 */}
       {projects.payload === undefined ||
         (projects.payload.length === 0 && (
@@ -55,19 +64,50 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
 
             const techStack = project.techStack;
 
-            const links = {
-              demo: project.demoURL,
-              repo: project.repoURL,
-            };
+            const links = [
+              {
+                href: project.demoURL,
+                icon: Compass,
+                label: localeData.demoLabel,
+              },
+              {
+                href: project.repoURL,
+                icon: Code,
+                label: localeData.repoLabel,
+              },
+            ];
+
             return (
               <ProjectCard
                 key={`${index}-${project.id}-${project.titleEN}`}
                 header={header}
                 img={img}
                 techStack={techStack}
-                links={links}
-                localeData={localeData}
-              />
+              >
+                {/* // TODO: refactor this */}
+                {links.every((link) => link.href.length === 0) && (
+                  <div className="bg-navy-700 hover:bg-navy-500 inline-flex h-9 w-full items-center justify-center gap-2 whitespace-nowrap rounded px-4 py-2 text-lg capitalize text-stone-300 transition-colors duration-500 ease-in hover:duration-150 hover:ease-out">
+                    <Icon icon={Empty} />
+                    {localeData.noButtonsLabel}
+                  </div>
+                )}
+
+                {links.map(
+                  (link, index) =>
+                    link.href.length > 0 && (
+                      <Anchor
+                        isExternal
+                        key={`${index}-${link.label}`}
+                        href={link.href}
+                        className="flex-1"
+                        variant="secondary"
+                      >
+                        <Icon icon={link.icon} />
+                        {link.label}
+                      </Anchor>
+                    ),
+                )}
+              </ProjectCard>
             );
           })}
         </div>
