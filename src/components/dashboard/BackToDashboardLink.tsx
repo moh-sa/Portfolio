@@ -1,16 +1,11 @@
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
-import { Icon } from "../UI";
+import { Anchor, Icon } from "~/components";
 
-type TProps = {
-  url: string;
-  label: string;
-};
-export function BackToDashboardLink({ url, label }: TProps) {
+export function BackToDashboard() {
   return (
-    <Link className="flex items-center gap-2 font-light" href={`/${url}`}>
+    <Anchor href="/dashboard" variant="ghost" width="auto">
       <Icon icon={ArrowLeft} size={20} />
-      Back to {label}
-    </Link>
+      Back to Dashboard
+    </Anchor>
   );
 }

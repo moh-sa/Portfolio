@@ -1,4 +1,4 @@
-import { Icon, LinkButton } from "~/components";
+import { Anchor, Icon } from "~/components";
 import { type TLocales } from "~/locales/locales";
 
 type TProps = {
@@ -7,14 +7,16 @@ type TProps = {
 export async function SocialLinks({ data }: TProps) {
   return (
     <ul className="space-y-2">
-      {data.map((link, index) => (
-        <li key={`${index}-${link.label}`}>
-          <LinkButton as="a" primary url={link.url}>
-            <Icon icon={link.icon} />
-            {link.label}
-          </LinkButton>
-        </li>
-      ))}
+      {data.map((link, index) => {
+        return (
+          <li key={`${index}-${link.label}`}>
+            <Anchor isExternal href={link.url}>
+              <Icon icon={link.icon} />
+              {link.label}
+            </Anchor>
+          </li>
+        );
+      })}
     </ul>
   );
 }
