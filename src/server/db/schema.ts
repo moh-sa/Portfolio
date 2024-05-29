@@ -63,8 +63,8 @@ export const projectZodSchema = z.object({
   imageURL: z.string().min(1),
   imageAltEN: z.string().min(1).max(1024),
   imageAltAR: z.string().min(1).max(1024),
-  demoURL: z.string().min(1).max(1024),
-  repoURL: z.string().min(1).max(1024),
+  demoURL: z.string().min(1).max(1024).optional(),
+  repoURL: z.string().min(1).max(1024).optional(),
   isOriginal: z.boolean().default(false),
   hidden: z.boolean().default(false),
 });
