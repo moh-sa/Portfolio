@@ -1,8 +1,7 @@
 import { BadgeGroup } from "~/components";
-import { type TLocales } from "~/locales/locales";
+import { ProjectFooter } from "./ProjectFooter";
 import { ProjectHeader } from "./ProjectHeader";
 import { ProjectImage } from "./ProjectImage";
-import { ProjectLinks } from "./ProjectLinks";
 
 type TProps = {
   header: {
@@ -14,19 +13,9 @@ type TProps = {
     alt: string;
   };
   techStack: string[];
-  links: {
-    demo: string;
-    repo: string;
-  };
-  localeData: TLocales["projects"];
+  children: React.ReactNode;
 };
-export function ProjectCard({
-  img,
-  header,
-  techStack,
-  links,
-  localeData,
-}: TProps) {
+export function ProjectCard({ img, header, techStack, children }: TProps) {
   return (
     <article className="bg-navy-900 flex min-h-full max-w-md flex-col justify-between gap-2 rounded-lg shadow-md lg:transition-transform lg:duration-500 lg:will-change-transform lg:hover:-translate-y-1 lg:hover:shadow-lg lg:hover:transition-transform lg:hover:duration-150">
       <section className="space-y-2">
@@ -35,11 +24,7 @@ export function ProjectCard({
       </section>
       <section className="space-y-2">
         <BadgeGroup techStack={techStack} />
-        <ProjectLinks
-          demoURL={links.demo}
-          repoURL={links.repo}
-          localeData={localeData}
-        />
+        <ProjectFooter>{children}</ProjectFooter>
       </section>
     </article>
   );
