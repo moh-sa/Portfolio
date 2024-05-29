@@ -1,19 +1,23 @@
+import {
+  BackToDashboard,
+  Button,
+  InputField,
+  TextAreaField,
+} from "~/components";
 import { groupedFields } from "~/data";
 import { type projectsSchema } from "~/server/db/schema";
-import { BackToDashboardLink } from "./BackToDashboardLink";
-import { InputField } from "./InputField";
-import { TextAreaField } from "./TextAreaField";
 
 type TProps = {
   heading: string;
   project?: typeof projectsSchema.$inferSelect;
   formAction: (formData: FormData) => void;
 };
+// TODO: refactor into smaller components
 export function ProjectForm({ heading, project, formAction }: TProps) {
   return (
     <div className="w-full max-w-xl px-4">
       <div className="w-full space-y-4">
-        <BackToDashboardLink url="dashboard" label="Dashboard" />
+        <BackToDashboard />
         <h1 className="text-3xl font-medium capitalize">{heading}</h1>
       </div>
       <form className="space-y-6" action={formAction}>
@@ -50,14 +54,7 @@ export function ProjectForm({ heading, project, formAction }: TProps) {
             </div>
           </div>
         ))}
-
-        {/* // TODO: refactor this and other similar looking buttons into one component*/}
-        <button
-          className="flex w-full items-center justify-center gap-2 rounded bg-black px-4 py-2 capitalize text-white transition-colors duration-500 ease-in hover:bg-white hover:text-black hover:duration-150 hover:ease-out"
-          type="submit"
-        >
-          Submit
-        </button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );
