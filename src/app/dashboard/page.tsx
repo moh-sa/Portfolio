@@ -4,7 +4,7 @@ import { deleteProject, getAllProjects } from "~/server/queries";
 
 // TODO: refactor into smaller components
 export default async function DashboardPage() {
-  const projects = await getAllProjects();
+  const projects = await getAllProjects({ isEnglish: true });
 
   async function handleProjectDelete({ projectID }: { projectID: number }) {
     "use server";
@@ -35,12 +35,12 @@ export default async function DashboardPage() {
           });
           return (
             <ProjectCard
-              key={`${index}-${project.id}-${project.titleEN}`}
+              key={`${index}-${project.id}-${project.title}`}
               header={{
-                title: project.titleEN,
-                description: project.descriptionEN,
+                title: project.title,
+                description: project.description,
               }}
-              img={{ src: project.imageURL, alt: project.imageAltEN }}
+              img={{ src: project.imageURL, alt: project.imageAlt }}
               techStack={project.techStack}
             >
               <>

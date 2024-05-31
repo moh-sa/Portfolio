@@ -67,54 +67,75 @@ export async function createNewProject({
   }
 }
 
-export const getAllProjects = cache(async () => {
-  try {
-    const projects = await db.query.projectsSchema.findMany({
-      orderBy: [desc(projectsSchema.createdAt)],
-    });
-    return {
-      status: "success",
-      payload: projects,
-    };
-  } catch (error) {
-    console.log("🚨 error in getAllProjects", error);
-    if (error instanceof ZodError) {
-      const errorMap = error.flatten().fieldErrors;
+export const getAllProjects = cache(
+  async ({ isEnglish }: { isEnglish: boolean }) => {
+    try {
+      const projects = await db.query.projectsSchema.findMany({
+        orderBy: [desc(projectsSchema.createdAt)],
+      });
+
+      const LocalizedProjects = projects.map((project) => {
+        const {
+          titleEN,
+          titleAR,
+          descriptionEN,
+          descriptionAR,
+          imageAltEN,
+          imageAltAR,
+          ...rest
+        } = project;
+        return {
+          title: isEnglish ? titleEN : titleAR,
+          description: isEnglish ? descriptionEN : descriptionAR,
+          imageAlt: isEnglish ? imageAltEN : imageAltAR,
+          ...rest,
+        };
+      });
+
       return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-          map: errorMap,
-        },
+        status: "success",
+        payload: LocalizedProjects,
       };
-    } else if (error instanceof PostgresError) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else if (error instanceof Error) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else {
-      return {
-        status: "failure",
-        error: {
-          message: "Something went wrong while getting all projects",
-          cause: "",
-        },
-      };
+    } catch (error) {
+      console.log("🚨 error in getAllProjects", error);
+      if (error instanceof ZodError) {
+        const errorMap = error.flatten().fieldErrors;
+        return {
+          status: "failure",
+          error: {
+            message: error.message,
+            cause: error.cause,
+            map: errorMap,
+          },
+        };
+      } else if (error instanceof PostgresError) {
+        return {
+          status: "failure",
+          error: {
+            message: error.message,
+            cause: error.cause,
+          },
+        };
+      } else if (error instanceof Error) {
+        return {
+          status: "failure",
+          error: {
+            message: error.message,
+            cause: error.cause,
+          },
+        };
+      } else {
+        return {
+          status: "failure",
+          error: {
+            message: "Something went wrong while getting all projects",
+            cause: "",
+          },
+        };
+      }
     }
-  }
-});
+  },
+);
 
 export const getSingleProject = cache(
   async ({ projectID }: { projectID: number }) => {

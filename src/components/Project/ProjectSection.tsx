@@ -17,7 +17,8 @@ type TProps = {
 
 // TODO: refactor into smaller components
 export async function ProjectSection({ localeType, localeData }: TProps) {
-  const projects = await getAllProjects();
+  const isEnglish = localeType === Locales.ENGLISH;
+  const projects = await getAllProjects({ isEnglish });
 
   // 👇 source: https://www.magicpattern.design/tools/css-backgrounds
   const backgroundImage =
@@ -25,7 +26,7 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
 
   return (
     <section
-      className={`bg-navy-600 relative z-[1] flex-grow overflow-hidden rounded-ee-md rounded-es-md p-4 text-indigo-300 lg:basis-3/4 lg:rounded-es-none lg:rounded-se-md lg:p-6 ${backgroundImage}`}
+      className={`relative z-[1] flex-grow overflow-hidden rounded-ee-md rounded-es-md bg-navy-600 p-4 text-indigo-300 lg:basis-3/4 lg:rounded-es-none lg:rounded-se-md lg:p-6 ${backgroundImage}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <CategoryHeading text={localeData.heading} />
@@ -33,7 +34,6 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
           <ToggleLocale localeType={localeType} />
         </span>
       </div>
-
       {/* // TODO: refactor this */}
       {/* 🚫 empty state 🚫 */}
       {projects.payload === undefined ||
@@ -43,27 +43,10 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
             <div className="text-4xl">{localeData.emptyState}</div>
           </div>
         ))}
-
       {/* ✨ projects container ✨ */}
       {projects.payload !== undefined && projects.payload.length > 0 && (
         <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 md:gap-6">
           {projects.payload.map((project, index) => {
-            const isEnglish = localeType === Locales.ENGLISH;
-
-            const header = {
-              title: isEnglish ? project.titleEN : project.titleAR,
-              description: isEnglish
-                ? project.descriptionEN
-                : project.descriptionAR,
-            };
-
-            const img = {
-              src: project.imageURL,
-              alt: isEnglish ? project.imageAltEN : project.imageAltAR,
-            };
-
-            const techStack = project.techStack;
-
             const links = [
               {
                 href: project.demoURL,
@@ -79,10 +62,16 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
 
             return (
               <ProjectCard
-                key={`${index}-${project.id}-${project.titleEN}`}
-                header={header}
-                img={img}
-                techStack={techStack}
+                key={`${index}-${project.id}-${project.title}`}
+                header={{
+                  title: project.title,
+                  description: project.description,
+                }}
+                img={{
+                  src: project.imageURL,
+                  alt: project.imageAlt,
+                }}
+                techStack={project.techStack}
               >
                 {/* 🚫 empty state 🚫 */}
                 {links.every((link) => link.href.length === 0) && (
