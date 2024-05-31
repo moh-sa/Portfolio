@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import Link from "next/link";
 import { cn } from "~/utils";
+import { AnchorEmptyState } from "./AnchorEmptyState";
 
 const AnchorVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded capitalize transition-colors duration-500 ease-in hover:duration-150 hover:ease-out",
@@ -33,12 +34,14 @@ const AnchorVariants = cva(
 interface AnchorProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof AnchorVariants> {
+  isEmpty?: boolean;
   isExternal?: boolean;
   href: string;
   children: React.ReactNode;
 }
 
 export function Anchor({
+  isEmpty,
   isExternal,
   className,
   variant,
@@ -47,6 +50,8 @@ export function Anchor({
   children,
   ...props
 }: AnchorProps) {
+  if (isEmpty) return <AnchorEmptyState>{children}</AnchorEmptyState>;
+
   const Element = isExternal ? "a" : Link;
   return (
     <Element
