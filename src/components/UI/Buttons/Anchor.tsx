@@ -51,6 +51,7 @@ export function Anchor({
   return (
     <Element
       className={cn(AnchorVariants({ variant, size, width, className }))}
+      target={isExternal ? "_blank" : undefined}
       {...props}
     >
       {children}
