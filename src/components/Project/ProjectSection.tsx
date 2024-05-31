@@ -84,12 +84,12 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
                 img={img}
                 techStack={techStack}
               >
-                {/* // TODO: refactor this */}
+                {/* 🚫 empty state 🚫 */}
                 {links.every((link) => link.href.length === 0) && (
-                  <div className="bg-navy-700 hover:bg-navy-500 inline-flex h-9 w-full items-center justify-center gap-2 whitespace-nowrap rounded px-4 py-2 text-lg capitalize text-stone-300 transition-colors duration-500 ease-in hover:duration-150 hover:ease-out">
+                  <Anchor isEmpty href="">
                     <Icon icon={Empty} />
                     {localeData.noButtonsLabel}
-                  </div>
+                  </Anchor>
                 )}
 
                 {links.map(
