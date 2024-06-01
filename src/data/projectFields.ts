@@ -80,4 +80,16 @@ export const groupedFields: TGroupedFields = {
       placeholder: "Tech,AnotherTech,OneMoreTech",
     },
   ],
+  other: [
+    {
+      as: "checkbox",
+      id: "hidden",
+      label: "Hidden",
+    },
+    {
+      as: "checkbox",
+      id: "isOriginal",
+      label: "Is Original",
+    },
+  ],
 };
