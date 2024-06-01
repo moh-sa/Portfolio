@@ -1,9 +1,11 @@
+import { v2 as cloudinary, type UploadApiResponse } from "cloudinary";
 import { desc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { PostgresError } from "postgres";
 import { cache } from "react";
 import "server-only";
 import { ZodError } from "zod";
+import { env } from "~/env";
 import { db } from "./db";
 import { projectZodSchema, projectsSchema } from "./db/schema";
 
@@ -313,4 +315,34 @@ export async function deleteProject(projectID: number) {
       };
     }
   }
+}
+
+cloudinary.config({
+  cloud_name: env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+  api_secret: env.CLOUDINARY_API_SECRET,
+});
+export async function uploadImageAndGetURL(formData: FormData) {
+  const file = formData.get("imageURL") as File;
+  const arrayBuffer = await file.arrayBuffer();
+  const buffer = new Uint8Array(arrayBuffer);
+
+  const result: UploadApiResponse | undefined = await new Promise(
+    (resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          { upload_preset: "Portfolio" },
+          function (error, result) {
+            if (error) {
+              reject(error);
+              return;
+            }
+            resolve(result);
+          },
+        )
+        .end(buffer);
+    },
+  );
+
+  return result?.secure_url;
 }

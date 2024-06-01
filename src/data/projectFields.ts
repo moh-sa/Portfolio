@@ -36,10 +36,9 @@ export const groupedFields: TGroupedFields = {
   image: [
     {
       as: "input",
-      type: "url",
+      type: "file",
       id: "imageURL",
-      label: "Image URL",
-      placeholder: "Image URL",
+      label: "Upload Image",
     },
     {
       as: "textarea",

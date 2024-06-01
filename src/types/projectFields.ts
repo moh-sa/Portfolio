@@ -8,7 +8,7 @@ export type TBase = {
 
 export type TInputProps = TBase & {
   as: "input";
-  type: "text" | "url";
+  type: "text" | "url" | "file";
 };
 
 export type TTextAreaProps = TBase & {

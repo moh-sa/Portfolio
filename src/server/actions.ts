@@ -1,24 +1,26 @@
 "use server";
 
-import { redirect } from "next/navigation";
-
+import {
+  isRedirectError,
+  redirect,
+} from "next/dist/client/components/redirect";
 import { formDataToProjectDetails } from "~/utils/formDataToProjectDetails";
-
 import { type projectsSchema } from "./db/schema";
-
-import { isRedirectError } from "next/dist/client/components/redirect";
 import {
   createNewProject,
   deleteProject,
   updateSingleProject,
+  uploadImageAndGetURL,
 } from "./queries";
 
 export async function createNewProjectAction(formData: FormData) {
+  const imageURL = await uploadImageAndGetURL(formData);
+  formData.set("imageURL", imageURL!);
+
   const projectObject = formDataToProjectDetails(formData);
 
   try {
     await createNewProject({ newProject: projectObject });
-
     redirect(`/dashboard`);
   } catch (error) {
     // 👇 this is a workaround for the strange behavior of next's redirect.
@@ -41,13 +43,21 @@ export async function updateProjectAction(
   project: typeof projectsSchema.$inferSelect,
   formData: FormData,
 ) {
-  const projectObject = formDataToProjectDetails(formData);
+  const file = formData.get("imageURL") as File;
 
+  let imageURL = "";
+  if (file?.size === 0) {
+    formData.delete("imageURL");
+  } else if (file.size > 0) {
+    imageURL = (await uploadImageAndGetURL(formData))!;
+    formData.set("imageURL", imageURL);
+  }
+
+  const projectObject = formDataToProjectDetails(formData);
   const updatedProject = { ...project, ...projectObject };
 
   try {
     await updateSingleProject({ updatedProject });
-
     redirect(`/dashboard`);
   } catch (error) {
     // 👇 this is a workaround for the strange behavior of next's redirect.
