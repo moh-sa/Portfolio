@@ -1,4 +1,4 @@
-import { Button, InputField, TextAreaField } from "~/components";
+import { Button, Checkbox, InputField, TextAreaField } from "~/components";
 import { groupedFields } from "~/data";
 import { type projectsSchema } from "~/server/db/schema";
 
@@ -39,6 +39,8 @@ export function Form({ project, formAction }: TProps) {
                     {...field}
                   />
                 );
+              } else if (field.as === "checkbox") {
+                return <Checkbox key={`${index}-${field.id}`} {...field} />;
               }
             })}
           </div>
