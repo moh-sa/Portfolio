@@ -5,7 +5,7 @@ export function BackToDashboard() {
   return (
     <Anchor href="/dashboard" variant="ghost" width="auto">
       <Icon icon={ArrowLeft} size={20} />
-      Back to Dashboard
+      Back
     </Anchor>
   );
 }
