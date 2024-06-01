@@ -30,7 +30,7 @@ export default async function DashboardPage() {
           ))}
 
         {projects?.payload?.map((project, index) => {
-          const deleteAction = handleProjectDelete.bind(null, {
+          const deleteActionWithProjectID = deleteProjectAction.bind(null, {
             projectID: project.id,
           });
           return (
@@ -52,7 +52,7 @@ export default async function DashboardPage() {
                   <Icon icon={NotePencil} size={20} />
                   Edit
                 </Anchor>
-                <form action={deleteAction}>
+                <form action={deleteActionWithProjectID}>
                   <Button
                     type="submit"
                     variant="destructive"

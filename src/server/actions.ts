@@ -7,7 +7,11 @@ import { formDataToProjectDetails } from "~/utils/formDataToProjectDetails";
 import { type projectsSchema } from "./db/schema";
 
 import { isRedirectError } from "next/dist/client/components/redirect";
-import { createNewProject, updateSingleProject } from "./queries";
+import {
+  createNewProject,
+  deleteProject,
+  updateSingleProject,
+} from "./queries";
 
 export async function createNewProjectAction(formData: FormData) {
   const projectObject = formDataToProjectDetails(formData);
@@ -35,7 +39,6 @@ export async function createNewProjectAction(formData: FormData) {
 
 export async function updateProjectAction(
   project: typeof projectsSchema.$inferSelect,
-
   formData: FormData,
 ) {
   const projectObject = formDataToProjectDetails(formData);
@@ -61,4 +64,12 @@ export async function updateProjectAction(
       console.log(error);
     }
   }
+}
+
+export async function deleteProjectAction({
+  projectID,
+}: {
+  projectID: number;
+}) {
+  await deleteProject(projectID);
 }
