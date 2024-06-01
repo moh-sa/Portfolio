@@ -1,4 +1,4 @@
-import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Cairo } from "next/font/google";
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -17,11 +17,8 @@ export default async function DashboardLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`font-sans ${cairo.variable}`}>
-          <main className="from-navy-600 flex min-h-screen flex-col items-center justify-center bg-gradient-to-b to-black py-8">
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            {children}
+          <main className="min-h-screen bg-gradient-to-b from-navy-600 to-black px-4 py-8">
+            <div className="mx-auto max-w-3xl">{children}</div>
           </main>
         </body>
       </html>

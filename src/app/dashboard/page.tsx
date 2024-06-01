@@ -1,34 +1,27 @@
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import { NotePencil, PlusCircle, Trash } from "@phosphor-icons/react/dist/ssr";
 import { Anchor, Button, Icon, ProjectCard } from "~/components";
-import { deleteProject, getAllProjects } from "~/server/queries";
+import { deleteProjectAction } from "~/server/actions";
+import { getAllProjects } from "~/server/queries";
 
-// TODO: refactor into smaller components
 export default async function DashboardPage() {
   const projects = await getAllProjects({ isEnglish: true });
 
-  async function handleProjectDelete({ projectID }: { projectID: number }) {
-    "use server";
-    await deleteProject(projectID);
-  }
-
   return (
     <>
-      <div className="mb-4 flex flex-col items-center justify-around gap-2">
-        <h1 className="text-center text-4xl font-extrabold text-white">
-          My Projects
-        </h1>
-        <Anchor href="/dashboard/add" variant="ghost">
-          <Icon icon={PlusCircle} />
-          Add Project
-        </Anchor>
+      <div className="mb-4 flex flex-col flex-wrap items-center justify-between gap-2 lg:flex-row">
+        <h1 className="text-center text-2xl text-white">My Projects</h1>
+        <div className="flex items-center justify-evenly gap-2">
+          <Anchor href="/dashboard/add" variant="ghost">
+            <Icon icon={PlusCircle} />
+            Add Project
+          </Anchor>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
       </div>
-
-      <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 md:gap-6">
-        {!projects ||
-          (projects?.payload === undefined && (
-            <div>{projects.error?.message}</div>
-          ))}
-
+      <div className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2">
         {projects?.payload?.map((project, index) => {
           const deleteActionWithProjectID = deleteProjectAction.bind(null, {
             projectID: project.id,
