@@ -15,6 +15,10 @@ export type TTextAreaProps = TBase & {
   as: "textarea";
 };
 
-export type TCombined = TInputProps | TTextAreaProps;
+export type TCheckboxProps = TBase & {
+  as: "checkbox";
+};
+
+export type TCombined = TInputProps | TTextAreaProps | TCheckboxProps;
 
 export type TGroupedFields = Record<string, TCombined[]>;
