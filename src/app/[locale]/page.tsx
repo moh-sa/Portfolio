@@ -1,20 +1,25 @@
-import AboutMe from '$/components/aboutMe/AboutMe';
-import Projects from '$/components/projects/Projects';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { ProfileSection, ProjectSection } from "~/components";
+import { getLocaleFile } from "~/locales/locales";
+import { type Locales } from "~/types";
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }];
+}
 
-export default function Home({
-  params: { locale },
-}: {
-  params: { locale: 'ar' | 'en' };
-}) {
-  // Due to the 'next-intl' current's version limitation
-  //This line is needed to create static pages
-  unstable_setRequestLocale(locale);
+type params = {
+  params: {
+    locale: Locales;
+  };
+};
+
+export default async function LocalePage({
+  params: { locale: localeType },
+}: params) {
+  const loc = await getLocaleFile(localeType);
 
   return (
     <>
-      <AboutMe />
-      <Projects />
+      <ProfileSection localeType={localeType} localeData={loc.profile} />
+      <ProjectSection localeType={localeType} localeData={loc.projects} />
     </>
   );
 }

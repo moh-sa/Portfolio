@@ -1,108 +1,49 @@
-import './globals.css';
-import styles from './layout.module.css';
-import { Analytics } from '@vercel/analytics/react';
-import { Open_Sans, Cairo } from 'next/font/google';
-import {
-  getTranslations,
-  unstable_setRequestLocale,
-} from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { ReactNode } from 'react';
-import { Metadata } from 'next';
-
-const roboto = Open_Sans({
-  weight: ['300', '400', '500', '600', '700', '800'],
-  subsets: ['latin'],
-});
+import { Analytics } from "@vercel/analytics/next";
+import { Cairo } from "next/font/google";
+import { getLocaleFile } from "~/locales/locales";
+import { Locales } from "~/types";
+import { getOpenGraphData } from "~/utils/metadata";
 
 const cairo = Cairo({
-  weight: ['300', '400', '500', '600', '700', '800'],
-  subsets: ['arabic', 'latin'],
+  subsets: ["arabic", "latin"],
+  variable: "--font-sans",
 });
 
-type Props = {
-  children: ReactNode;
-  params: { locale: string };
-};
-
-export const locales = ['en', 'ar'];
-
-// Due to the 'next-intl' current's version limitation
-// this line is needed to enable static rendering
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
-
-export async function generateMetadata({
-  params: { locale },
-}: Omit<Props, 'children'>): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'Metadata' });
-
-  return {
-    title: t('title'),
-    description: t('description'),
-    keywords: [
-      'full-stack',
-      'web developer',
-      'react.js',
-      'next.js',
-      'mongoDB',
-      'postgreSQL',
-      'tailwind',
-      'CSS',
-      'native css',
-      'typescript',
-      'portfolio',
-      'mohammed sobhi',
-      'Tno',
-      'MSA',
-      'Tno MSA',
-    ],
-    openGraph: {
-      title: t('title'),
-      description: t('description'),
-      url: 'https://moh-sa.dev',
-      type: 'website',
-    },
-    twitter: {
-      title: t('title'),
-      description: t('description'),
-      creator: '@Tno_MSA',
-      card: 'summary_large_image',
-    },
+type TProps = {
+  children: React.ReactNode;
+  params: {
+    locale: Locales;
   };
-}
-
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: Props) {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as any)) notFound();
-
-  // Due to the 'next-intl' current's version limitation
-  // This line is needed to enable static rendering
-  unstable_setRequestLocale(locale);
-
-  const dir = locale === 'ar' ? 'rtl' : 'ltr';
-
-  const fontFamily =
-    locale === 'ar' ? cairo.className : roboto.className;
-
+};
+export default function LocaleLayout({ children, params: { locale } }: TProps) {
+  const localeConfig = {
+    locale: locale === Locales.ENGLISH ? "en" : "ar",
+    dir: locale === Locales.ENGLISH ? "ltr" : "rtl",
+    font: cairo.variable,
+  };
   return (
-    <html lang={locale}>
+    <html lang={localeConfig.locale} dir={localeConfig.dir}>
       <body
-        style={{ background: 'hsl(230 33% 26%)' }}
-        className={`${fontFamily}`}
+        className={`font-sans ${localeConfig.font} bg-navy-500 flex min-h-screen`}
       >
-        <main
-          className={styles.main}
-          dir={dir}
-        >
+        <main className="xl:outline-navy-400 container mx-auto flex flex-col lg:flex lg:flex-row xl:my-8 xl:rounded-md xl:outline xl:outline-4 xl:drop-shadow-md">
           {children}
         </main>
         <Analytics />
       </body>
     </html>
   );
+}
+export async function generateMetadata({ params: { locale } }: TProps) {
+  const loc = await getLocaleFile(locale);
+  const { og, tw } = getOpenGraphData({
+    localeData: loc.metadata,
+    locale: locale,
+  });
+  return {
+    title: loc.metadata.title,
+    description: loc.metadata.description,
+    openGraph: { ...og },
+    twitter: { ...tw },
+  };
 }

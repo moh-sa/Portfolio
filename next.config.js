@@ -1,11 +1,19 @@
-/** @type {import('next').NextConfig} */
-const withNextIntl = require('next-intl/plugin')();
+/**
+ * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
+ * for Docker builds.
+ */
+await import("./src/env.js");
 
-module.exports = withNextIntl({
-  experimental: {
-    appDir: true,
-  },
+/** @type {import("next").NextConfig} */
+const config = {
   images: {
-    domains: ['res.cloudinary.com'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
-});
+};
+
+export default config;

@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --circlePos: 100% 0%;
+  &:where([dir="rtl"], [dir="rtl"] *) {
+    --circlePos: 0% 0%;
+  }
+}
