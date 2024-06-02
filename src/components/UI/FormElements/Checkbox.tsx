@@ -1,17 +1,14 @@
-import { type TCheckboxProps } from "~/types";
 import { Label } from "./label";
 
-export function Checkbox({ id, label, ...props }: TCheckboxProps) {
+type TProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  id: string;
+  label: string;
+};
+
+export function Checkbox({ id, label, ...props }: TProps) {
   return (
-    <div className="w-full space-y-1">
-      <input
-        type="checkbox"
-        id={id}
-        name={id}
-        defaultChecked={false}
-        className="mr-2"
-        {...props}
-      />
+    <div className="w-full space-x-2">
+      <input type="checkbox" id={id} name={id} {...props} />
       <Label id={id} label={label} />
     </div>
   );

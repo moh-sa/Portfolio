@@ -1,13 +1,14 @@
-import { type TTextAreaProps } from "~/types";
 import { Label } from "./label";
 
-export function TextAreaField({
-  id,
-  label,
-  placeholder,
-  isArabic: dir,
-  value,
-}: TTextAreaProps) {
+type TProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  id: string;
+  label: string;
+  placeholder: string;
+  isArabic?: boolean;
+};
+
+export function TextAreaField({ id, label, isArabic, value, ...rest }: TProps) {
+  const dir = isArabic ? "rtl" : "ltr";
   return (
     <div dir={dir} className="w-full space-y-1">
       <Label id={id} label={label} />
@@ -16,8 +17,8 @@ export function TextAreaField({
         id={id}
         name={id}
         rows={4}
-        placeholder={placeholder}
         defaultValue={value}
+        {...rest}
       />
     </div>
   );
