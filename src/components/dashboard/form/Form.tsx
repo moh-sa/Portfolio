@@ -1,10 +1,5 @@
-import {
-  Button,
-  Checkbox,
-  Fieldset,
-  InputField,
-  TextAreaField,
-} from "~/components";
+import { Checkbox, Fieldset, InputField, TextAreaField } from "~/components";
+import { FormStatusButtonWrapper } from "~/components/UI/Buttons/ClientFormButtonWrapper";
 import { type projectsSchema } from "~/server/db/schema";
 
 type TProps = {
@@ -113,8 +108,7 @@ export function Form({ project, formAction }: TProps) {
           defaultChecked={project?.isOriginal}
         />
       </Fieldset>
-
-      <Button type="submit">Submit</Button>
+      <FormStatusButtonWrapper>Submit</FormStatusButtonWrapper>
     </form>
   );
 }

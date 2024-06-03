@@ -1,6 +1,7 @@
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { NotePencil, PlusCircle, Trash } from "@phosphor-icons/react/dist/ssr";
-import { Anchor, Button, Icon, ProjectCard } from "~/components";
+import { Anchor, Icon, ProjectCard } from "~/components";
+import { FormStatusButtonWrapper } from "~/components/UI/Buttons/ClientFormButtonWrapper";
 import { deleteProjectAction } from "~/server/actions";
 import { getAllProjects } from "~/server/queries";
 
@@ -46,14 +47,13 @@ export default async function DashboardPage() {
                   Edit
                 </Anchor>
                 <form action={deleteActionWithProjectID}>
-                  <Button
-                    type="submit"
+                  <FormStatusButtonWrapper
                     variant="destructive"
                     className="flex-1"
                   >
                     <Icon icon={Trash} size={20} />
                     Delete
-                  </Button>
+                  </FormStatusButtonWrapper>
                 </form>
               </>
             </ProjectCard>
