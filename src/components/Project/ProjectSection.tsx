@@ -18,7 +18,10 @@ type TProps = {
 // TODO: refactor into smaller components
 export async function ProjectSection({ localeType, localeData }: TProps) {
   const isEnglish = localeType === Locales.ENGLISH;
-  const projects = await getAllProjects({ isEnglish });
+  const projects = await getAllProjects({ isEnglish }).then((res) => {
+    if (res?.status === "failure") return [];
+    return res.payload?.filter((project) => !project.hidden) ?? [];
+  });
 
   // 👇 source: https://www.magicpattern.design/tools/css-backgrounds
   const backgroundImage =
@@ -36,17 +39,16 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
       </div>
       {/* // TODO: refactor this */}
       {/* 🚫 empty state 🚫 */}
-      {projects.payload === undefined ||
-        (projects.payload.length === 0 && (
-          <div className="flex flex-col items-center justify-center gap-2 pb-9 text-center lg:pb-0">
-            <Icon icon={XCircle} size={64} />
-            <div className="text-4xl">{localeData.emptyState}</div>
-          </div>
-        ))}
+      {projects.length === 0 && (
+        <div className="flex flex-col items-center justify-center gap-2 pb-9 text-center lg:pb-0">
+          <Icon icon={XCircle} size={64} />
+          <div className="text-4xl">{localeData.emptyState}</div>
+        </div>
+      )}
       {/* ✨ projects container ✨ */}
-      {projects.payload !== undefined && projects.payload.length > 0 && (
+      {projects.length > 0 && (
         <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 md:gap-6">
-          {projects.payload.map((project, index) => {
+          {projects.map((project, index) => {
             const links = [
               {
                 href: project.demoURL,
