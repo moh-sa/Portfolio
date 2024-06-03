@@ -6,12 +6,13 @@ export function formDataToProjectDetails(formData: FormData) {
       if (key === "techStack") {
         const techStack = value.split(",").map((tech) => tech.trim());
         projectDetails.set("techStack", techStack);
-      } else if (key === "hidden" || key === "isOriginal") {
-        projectDetails.set(key, value === "on" ? true : false);
       } else {
         projectDetails.set(key, value);
       }
     }
+
+    projectDetails.set("hidden", formData.get("hidden") === "on");
+    projectDetails.set("isOriginal", formData.get("isOriginal") === "on");
   });
 
   return Object.fromEntries(projectDetails);
