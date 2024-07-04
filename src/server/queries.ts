@@ -7,13 +7,13 @@ import "server-only";
 import { ZodError } from "zod";
 import { env } from "~/env";
 import { db } from "./db";
-import { projectZodSchema, projectsSchema } from "./db/schema";
+import { projectSchema, projectZodSchema } from "./db/schemas";
 
 // TODO: use better error handling approach
 export async function createNewProject({
   newProject,
 }: {
-  newProject: typeof projectsSchema.$inferInsert;
+  newProject: typeof projectSchema.$inferInsert;
 }) {
   try {
     const customNewProjectSchema = projectZodSchema.extend({
@@ -21,7 +21,7 @@ export async function createNewProject({
     });
     const parsedData = customNewProjectSchema.parse(newProject);
 
-    await db.insert(projectsSchema).values({ ...parsedData });
+    await db.insert(projectSchema).values({ ...parsedData });
 
     revalidatePath("/[locale]", "page");
     revalidatePath("/dashboard", "page");
@@ -73,7 +73,7 @@ export const getAllProjects = cache(
   async ({ isEnglish }: { isEnglish: boolean }) => {
     try {
       const projects = await db.query.projectsSchema.findMany({
-        orderBy: [desc(projectsSchema.createdAt)],
+        orderBy: [desc(projectSchema.createdAt)],
       });
 
       const LocalizedProjects = projects.map((project) => {
@@ -143,7 +143,7 @@ export const getSingleProject = cache(
   async ({ projectID }: { projectID: number }) => {
     try {
       const project = await db.query.projectsSchema.findFirst({
-        where: eq(projectsSchema.id, projectID),
+        where: eq(projectSchema.id, projectID),
       });
       return {
         status: "success",
@@ -193,7 +193,7 @@ export const getSingleProject = cache(
 export async function updateSingleProject({
   updatedProject,
 }: {
-  updatedProject: typeof projectsSchema.$inferInsert;
+  updatedProject: typeof projectSchema.$inferInsert;
 }) {
   try {
     const parsedData = projectZodSchema.parse(updatedProject);
@@ -208,9 +208,9 @@ export async function updateSingleProject({
     }
 
     await db
-      .update(projectsSchema)
+      .update(projectSchema)
       .set({ ...parsedData })
-      .where(eq(projectsSchema.id, parsedData.id));
+      .where(eq(projectSchema.id, parsedData.id));
 
     revalidatePath("/[locale]", "page");
     revalidatePath("/dashboard", "page");
@@ -261,7 +261,7 @@ export async function updateSingleProject({
 export async function deleteProject(projectID: number) {
   try {
     const project = await db.query.projectsSchema.findFirst({
-      where: eq(projectsSchema.id, projectID),
+      where: eq(projectSchema.id, projectID),
     });
 
     if (!project) {
@@ -269,7 +269,7 @@ export async function deleteProject(projectID: number) {
       throw new Error(`Project with ID: ${projectID} not found`);
     }
 
-    await db.delete(projectsSchema).where(eq(projectsSchema.id, projectID));
+    await db.delete(projectSchema).where(eq(projectSchema.id, projectID));
 
     revalidatePath("/[locale]", "page");
     revalidatePath("/dashboard", "page");

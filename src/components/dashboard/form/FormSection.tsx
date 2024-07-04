@@ -1,4 +1,4 @@
-import { type projectsSchema } from "~/server/db/schema";
+import { type projectSchema } from "~/server/db/schemas";
 
 import { FormHeader } from "./FormHeader";
 
@@ -7,7 +7,7 @@ import { Form } from "./Form";
 type TProps = {
   heading: string;
 
-  project?: typeof projectsSchema.$inferSelect;
+  project?: typeof projectSchema.$inferSelect;
 
   formAction: (formData: FormData) => void;
 };

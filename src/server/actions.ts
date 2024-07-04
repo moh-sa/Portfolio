@@ -5,7 +5,7 @@ import {
   redirect,
 } from "next/dist/client/components/redirect";
 import { formDataToProjectDetails } from "~/utils/formDataToProjectDetails";
-import { type projectsSchema } from "./db/schema";
+import { type projectSchema } from "./db/schemas";
 import {
   createNewProject,
   deleteProject,
@@ -40,7 +40,7 @@ export async function createNewProjectAction(formData: FormData) {
 }
 
 export async function updateProjectAction(
-  project: typeof projectsSchema.$inferSelect,
+  project: typeof projectSchema.$inferSelect,
   formData: FormData,
 ) {
   const file = formData.get("imageURL") as File;

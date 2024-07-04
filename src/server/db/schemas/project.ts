@@ -1,27 +1,9 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
-
 import { sql } from "drizzle-orm";
-import {
-  boolean,
-  pgTableCreator,
-  serial,
-  text,
-  timestamp,
-  varchar,
-} from "drizzle-orm/pg-core";
+import { boolean, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { z } from "zod";
+import { createTable } from "./base";
 
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
-export const createTable = pgTableCreator((name) => `portfolio_${name}`);
-
-// Data tables
-export const projectsSchema = createTable("projects", {
+export const projectSchema = createTable("projects", {
   id: serial("id").primaryKey(),
 
   titleEN: varchar("title_en", { length: 256 }).notNull().default(""),
