@@ -37,3 +37,6 @@ TODO
 
 # typescript
 *.tsbuildinfo
+
+# Docker
+db-data
