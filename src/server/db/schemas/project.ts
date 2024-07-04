@@ -1,4 +1,3 @@
-import { sql } from "drizzle-orm";
 import { boolean, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { z } from "zod";
 import { createTable } from "./base";
@@ -16,10 +15,7 @@ export const projectSchema = createTable("projects", {
     .notNull()
     .default(""),
 
-  techStack: text("tech_stack")
-    .array()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`),
+  techStack: text("tech_stack").notNull().default(""),
 
   imageURL: text("image_url").notNull().default(""),
   imageAltEN: varchar("image_alt_en", { length: 1024 }).notNull().default(""),
