@@ -1,5 +1,5 @@
 import { boolean, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
-import { z } from "zod";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { createTable } from "./base";
 
 export const projectSchema = createTable("projects", {
@@ -31,18 +31,5 @@ export const projectSchema = createTable("projects", {
 });
 
 // Zod Schema
-export const projectZodSchema = z.object({
-  id: z.number().positive(),
-  titleEN: z.string().min(1).max(256),
-  titleAR: z.string().min(1).max(256),
-  descriptionEN: z.string().min(1).max(1024),
-  descriptionAR: z.string().min(1).max(1024),
-  techStack: z.array(z.string()).min(1),
-  imageURL: z.string().min(1),
-  imageAltEN: z.string().min(1).max(1024),
-  imageAltAR: z.string().min(1).max(1024),
-  demoURL: z.string().min(1).max(1024).optional(),
-  repoURL: z.string().min(1).max(1024).optional(),
-  isOriginal: z.boolean().default(false),
-  hidden: z.boolean().default(false),
-});
+export const insertProjectSchema = createInsertSchema(projectSchema);
+export const selectProjectSchema = createSelectSchema(projectSchema);

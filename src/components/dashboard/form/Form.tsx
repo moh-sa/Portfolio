@@ -1,9 +1,9 @@
 import { Checkbox, Fieldset, InputField, TextAreaField } from "~/components";
 import { FormStatusButtonWrapper } from "~/components/UI/Buttons/ClientFormButtonWrapper";
-import { type projectSchema } from "~/server/db/schemas";
+import { type insertProjectSchema } from "~/server/db/schemas";
 
 type TProps = {
-  project?: typeof projectSchema.$inferSelect;
+  project?: typeof insertProjectSchema._type;
   formAction: (formData: FormData) => void;
 };
 export function Form({ project, formAction }: TProps) {

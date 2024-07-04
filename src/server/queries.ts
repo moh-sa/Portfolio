@@ -7,19 +7,16 @@ import "server-only";
 import { ZodError } from "zod";
 import { env } from "~/env";
 import { db } from "./db";
-import { projectSchema, projectZodSchema } from "./db/schemas";
+import { insertProjectSchema, projectSchema } from "./db/schemas";
 
 // TODO: use better error handling approach
 export async function createNewProject({
   newProject,
 }: {
-  newProject: typeof projectSchema.$inferInsert;
+  newProject: typeof insertProjectSchema._type;
 }) {
   try {
-    const customNewProjectSchema = projectZodSchema.extend({
-      id: projectZodSchema.shape.id.optional(),
-    });
-    const parsedData = customNewProjectSchema.parse(newProject);
+    const parsedData = insertProjectSchema.parse(newProject);
 
     await db.insert(projectSchema).values({ ...parsedData });
 
@@ -193,13 +190,13 @@ export const getSingleProject = cache(
 export async function updateSingleProject({
   updatedProject,
 }: {
-  updatedProject: typeof projectSchema.$inferInsert;
+  updatedProject: typeof insertProjectSchema._type;
 }) {
   try {
-    const parsedData = projectZodSchema.parse(updatedProject);
+    const parsedData = insertProjectSchema.parse(updatedProject);
 
     const isProjectExists = await getSingleProject({
-      projectID: parsedData.id,
+      projectID: parsedData.id!,
     });
 
     if (!isProjectExists) {
@@ -210,7 +207,7 @@ export async function updateSingleProject({
     await db
       .update(projectSchema)
       .set({ ...parsedData })
-      .where(eq(projectSchema.id, parsedData.id));
+      .where(eq(projectSchema.id, parsedData.id!));
 
     revalidatePath("/[locale]", "page");
     revalidatePath("/dashboard", "page");
