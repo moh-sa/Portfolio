@@ -36,8 +36,12 @@ export const insertProjectSchema = createInsertSchema(projectSchema, {
   demoURL: (schema) => schema.demoURL.url(),
   imageURL: (schema) => schema.imageURL.url(),
 });
+export type InsertProjectType = typeof insertProjectSchema._type;
+
 export const selectProjectSchema = createSelectSchema(projectSchema, {
   repoURL: (schema) => schema.repoURL.url(),
   demoURL: (schema) => schema.demoURL.url(),
   imageURL: (schema) => schema.imageURL.url(),
 });
+export type SelectProjectType = typeof selectProjectSchema._type;
+
