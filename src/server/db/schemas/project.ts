@@ -45,3 +45,19 @@ export const selectProjectSchema = createSelectSchema(projectSchema, {
 });
 export type SelectProjectType = typeof selectProjectSchema._type;
 
+export const selectProjectEnglishSchema = selectProjectSchema
+  .omit({ descriptionAR: true, imageAltAR: true, titleAR: true })
+  .transform(({ titleEN, descriptionEN, imageAltEN, ...rest }) => ({
+    title: titleEN,
+    description: descriptionEN,
+    imageAlt: imageAltEN,
+    ...rest,
+  }));
+export const selectProjectArabicSchema = selectProjectSchema
+  .omit({ descriptionEN: true, imageAltEN: true, titleEN: true })
+  .transform(({ titleAR, descriptionAR, imageAltAR, ...rest }) => ({
+    title: titleAR,
+    description: descriptionAR,
+    imageAlt: imageAltAR,
+    ...rest,
+  }));
