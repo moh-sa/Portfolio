@@ -1,42 +1,36 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/dist/client/components/redirect";
+import { convertBooleans, getCheckboxBooleanValue } from "~/utils";
 import {
-  isRedirectError,
-  redirect,
-} from "next/dist/client/components/redirect";
-import { formDataToProjectDetails } from "~/utils/formDataToProjectDetails";
-import { type selectProjectSchema } from "./db/schemas";
-import {
-  createNewProject,
   deleteProject,
-  updateSingleProject,
-  uploadImageAndGetURL,
-} from "./queries";
+  insertProject,
+  updateProject,
+} from "./db/projectQueries";
+import { type selectProjectSchema } from "./db/schemas";
+import { uploadImageAndGetURL } from "./uploadImageAndGetURL";
+
+const checkBoxes = ["isHidden", "isOriginal"];
 
 export async function createNewProjectAction(formData: FormData) {
-  const imageURL = await uploadImageAndGetURL(formData);
-  formData.set("imageURL", imageURL!);
+  const imageURL = await uploadImageAndGetURL({ formData });
+  formData.set("imageURL", imageURL ?? "");
 
-  const projectObject = formDataToProjectDetails(formData);
+  checkBoxes.forEach((key) => {
+    const value = getCheckboxBooleanValue({ formData, key }).toString();
+    formData.set(key, value);
+  });
 
-  try {
-    await createNewProject({ newProject: projectObject });
-    redirect(`/dashboard`);
-  } catch (error) {
-    // 👇 this is a workaround for the strange behavior of next's redirect.
+  const formDataToObject = Object.fromEntries(formData);
+  const convertedBooleans = convertBooleans({ data: formDataToObject });
 
-    // 'redirect' should be called outside of a try/catch block, but then you will lose the field values if the api call fails.
+  const response = await insertProject({ project: convertedBooleans });
+  if (response.status === "failure") return response;
 
-    // @see https://github.com/vercel/next.js/issues/55586
-
-    if (isRedirectError(error)) {
-      console.log(error);
-
-      throw error;
-    } else {
-      console.log(error);
-    }
-  }
+  revalidatePath("/[locale]", "page");
+  revalidatePath("/dashboard", "page");
+  redirect(`/dashboard`);
 }
 
 export async function updateProjectAction(
@@ -45,35 +39,28 @@ export async function updateProjectAction(
 ) {
   const file = formData.get("imageURL") as File;
 
-  let imageURL = "";
-  if (file?.size === 0) {
+  if (file.size === 0) {
     formData.delete("imageURL");
   } else if (file.size > 0) {
-    imageURL = (await uploadImageAndGetURL(formData))!;
+    const imageURL = (await uploadImageAndGetURL({ formData })) ?? "";
     formData.set("imageURL", imageURL);
   }
 
-  const projectObject = formDataToProjectDetails(formData);
-  const updatedProject = { ...project, ...projectObject };
+  checkBoxes.forEach((key) => {
+    const value = getCheckboxBooleanValue({ formData, key }).toString();
+    formData.set(key, value);
+  });
 
-  try {
-    await updateSingleProject({ updatedProject });
-    redirect(`/dashboard`);
-  } catch (error) {
-    // 👇 this is a workaround for the strange behavior of next's redirect.
+  const formDataToObject = Object.fromEntries(formData);
+  const convertedBooleans = convertBooleans({ data: formDataToObject });
+  const updatedProject = { ...project, ...convertedBooleans };
 
-    // 'redirect' should be called outside of a try/catch block, but then you will lose the field values if the api call fails.
+  const response = await updateProject({ project: updatedProject });
+  if (response.status === "failure") return response;
 
-    // @see https://github.com/vercel/next.js/issues/55586
-
-    if (isRedirectError(error)) {
-      console.log(error);
-
-      throw error;
-    } else {
-      console.log(error);
-    }
-  }
+  revalidatePath("/[locale]", "page");
+  revalidatePath("/dashboard", "page");
+  redirect(`/dashboard`);
 }
 
 export async function deleteProjectAction({
@@ -81,5 +68,9 @@ export async function deleteProjectAction({
 }: {
   projectID: number;
 }) {
-  await deleteProject(projectID);
+  const response = await deleteProject({ projectID });
+  if (response.status === "failure") return response;
+
+  revalidatePath("/[locale]", "page");
+  revalidatePath("/dashboard", "page");
 }
