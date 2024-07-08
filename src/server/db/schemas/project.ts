@@ -25,7 +25,7 @@ export const projectSchema = createTable("projects", {
   repoURL: varchar("repo_url", { length: 1024 }).notNull().default(""),
 
   isOriginal: boolean("is_original").notNull().default(false),
-  hidden: boolean("hidden").notNull().default(false),
+  isHidden: boolean("is_hidden").notNull().default(false),
 
   createdAt: timestamp("created_at").defaultNow(),
 });
