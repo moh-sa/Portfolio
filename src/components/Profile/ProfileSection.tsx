@@ -9,7 +9,7 @@ type TProps = {
 };
 export async function ProfileSection({ localeType, localeData }: TProps) {
   return (
-    <section className="bg-navy-800 rounded-se-md rounded-ss-md p-4 lg:basis-1/4 lg:rounded-es-md lg:rounded-se-none lg:px-6">
+    <section className="rounded-se-md rounded-ss-md bg-navy-800 p-4 lg:basis-1/4 lg:rounded-es-md lg:rounded-se-none lg:px-6">
       <div className="mb-4 block lg:hidden">
         <ToggleLocale localeType={localeType} />
       </div>
@@ -27,7 +27,10 @@ export async function ProfileSection({ localeType, localeData }: TProps) {
         {/* ✨ Skills ✨ */}
         <div>
           <CategoryHeading text={localeData.skills.heading} />
-          <BadgeGroup isProfile techStack={localeData.skills.stack} />
+          <BadgeGroup
+            isProfile
+            techStack={localeData.skills.stack.join(", ")}
+          />
         </div>
 
         {/* ✨ Social Links ✨ */}
