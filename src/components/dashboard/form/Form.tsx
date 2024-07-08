@@ -101,7 +101,11 @@ export function Form({ project, formAction }: TProps) {
 
       {/* ✨ Checkboxes ✨ */}
       <Fieldset legend="Other">
-        <Checkbox id="hidden" label="Hidden" defaultChecked={project?.hidden} />
+        <Checkbox
+          id="isHidden"
+          label="Is Hidden"
+          defaultChecked={project?.isHidden}
+        />
         <Checkbox
           id="isOriginal"
           label="Is Original"

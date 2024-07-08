@@ -20,7 +20,7 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
   const isEnglish = localeType === Locales.ENGLISH;
   const projects = await getAllProjects({ isEnglish }).then((res) => {
     if (res?.status === "failure") return [];
-    return res.payload?.filter((project) => !project.hidden) ?? [];
+    return res.payload?.filter((project) => !project.isHidden) ?? [];
   });
 
   // 👇 source: https://www.magicpattern.design/tools/css-backgrounds
