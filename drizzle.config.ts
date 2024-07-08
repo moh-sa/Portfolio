@@ -6,7 +6,8 @@ export default {
   schema: "./src/server/db/schemas/index.ts",
   dialect: "postgresql",
   dbCredentials: {
-    url: env.DATABASE_URL,
+    url:
+      env.NODE_ENV !== "production" ? env.DATABASE_DEV_URL : env.DATABASE_URL,
   },
   tablesFilter: ["portfolio_*"],
 } satisfies Config;
