@@ -25,13 +25,9 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
     return res.payload.filter((project) => !project.isHidden) ?? [];
   });
 
-  // 👇 source: https://www.magicpattern.design/tools/css-backgrounds
-  const backgroundImage =
-    "before:absolute before:inset-0 before:-z-[1] before:bg-[#e5e5f7] before:mix-blend-multiply before:blur-[2px] before:grayscale before:[background-image:repeating-radial-gradient(circle_at_var(--circlePos),transparent_0,#e5e5f7_10px),repeating-linear-gradient(#444cf755,#444cf7)]";
-
   return (
     <section
-      className={`relative z-[1] flex-grow overflow-hidden rounded-ee-md rounded-es-md bg-navy-600 p-4 text-indigo-300 lg:basis-3/4 lg:rounded-es-none lg:rounded-se-md lg:p-6 ${backgroundImage}`}
+      className={`bg-pattern relative z-[1] flex-grow overflow-hidden rounded-ee-md rounded-es-md bg-navy-600 p-4 text-indigo-300 lg:basis-3/4 lg:rounded-es-none lg:rounded-se-md lg:p-6`}
     >
       <div className="mb-2 flex items-center justify-between">
         <CategoryHeading text={localeData.heading} />

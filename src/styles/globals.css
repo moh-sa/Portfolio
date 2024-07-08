@@ -8,3 +8,10 @@
     --circlePos: 0% 0%;
   }
 }
+
+@layer components {
+  .bg-pattern {
+    /* source: https://www.magicpattern.design/tools/css-backgrounds */
+    @apply before:absolute before:inset-0 before:-z-[1] before:bg-[#e5e5f7] before:mix-blend-multiply before:blur-[2px] before:grayscale before:[background-image:repeating-radial-gradient(circle_at_var(--circlePos),transparent_0,#e5e5f7_10px),repeating-linear-gradient(#444cf755,#444cf7)];
+  }
+}
