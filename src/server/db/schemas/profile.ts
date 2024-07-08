@@ -77,3 +77,77 @@ export const selectProfileSchema = createSelectSchema(profileSchema, {
   githubLink: (schema) => schema.githubLink.url(),
 });
 export type SelectProfileType = typeof selectProfileSchema._type;
+
+export const selectProfileEnglishSchema = selectProfileSchema
+  .omit({
+    nameAR: true,
+    bioAR: true,
+    skillsTitleAR: true,
+    contactTitleAR: true,
+    emailLabelAR: true,
+    resumeLabelAR: true,
+    linkedinLabelAR: true,
+    githubLabelAR: true,
+  })
+  .transform(
+    ({
+      nameEN,
+      bioEN,
+      skillsTitleEN,
+      contactTitleEN,
+      emailLabelEN,
+      resumeLabelEN,
+      linkedinLabelEN,
+      githubLabelEN,
+      ...rest
+    }) => ({
+      name: nameEN,
+      bio: bioEN,
+      skillsTitle: skillsTitleEN,
+      contactTitle: contactTitleEN,
+      emailLabel: emailLabelEN,
+      resumeLabel: resumeLabelEN,
+      linkedinLabel: linkedinLabelEN,
+      githubLabel: githubLabelEN,
+      ...rest,
+    }),
+  );
+
+export const selectProfileArabicSchema = selectProfileSchema
+  .omit({
+    nameEN: true,
+    bioEN: true,
+    skillsTitleEN: true,
+    contactTitleEN: true,
+    emailLabelEN: true,
+    resumeLabelEN: true,
+    linkedinLabelEN: true,
+    githubLabelEN: true,
+  })
+  .transform(
+    ({
+      nameAR,
+      bioAR,
+      skillsTitleAR,
+      contactTitleAR,
+      emailLabelAR,
+      resumeLabelAR,
+      linkedinLabelAR,
+      githubLabelAR,
+      ...rest
+    }) => ({
+      name: nameAR,
+      bio: bioAR,
+      skillsTitle: skillsTitleAR,
+      contactTitle: contactTitleAR,
+      emailLabel: emailLabelAR,
+      resumeLabel: resumeLabelAR,
+      linkedinLabel: linkedinLabelAR,
+      githubLabel: githubLabelAR,
+      ...rest,
+    }),
+  );
+
+export type SelectProfileLocaleType =
+  | typeof selectProfileEnglishSchema._type
+  | typeof selectProfileArabicSchema._type;
