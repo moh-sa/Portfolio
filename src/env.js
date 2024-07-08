@@ -13,12 +13,14 @@ const EnvSchema = z.object({
   NEXT_PUBLIC_CLOUDINARY_API_KEY: z.string(),
   CLOUDINARY_API_SECRET: z.string(),
 
+  DATABASE_URL: z.string().url(),
+
   DB_HOST: z.string(),
   DB_USER: z.string(),
   DB_PASSWORD: z.string(),
   DB_NAME: z.string(),
   DB_PORT: z.string(),
-  DATABASE_URL: z.string().url(),
+  DATABASE_DEV_URL: z.string().url(),
 });
 
 expand(config());
