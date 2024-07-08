@@ -31,5 +31,13 @@ export const projectSchema = createTable("projects", {
 });
 
 // Zod Schema
-export const insertProjectSchema = createInsertSchema(projectSchema);
-export const selectProjectSchema = createSelectSchema(projectSchema);
+export const insertProjectSchema = createInsertSchema(projectSchema, {
+  repoURL: (schema) => schema.repoURL.url(),
+  demoURL: (schema) => schema.demoURL.url(),
+  imageURL: (schema) => schema.imageURL.url(),
+});
+export const selectProjectSchema = createSelectSchema(projectSchema, {
+  repoURL: (schema) => schema.repoURL.url(),
+  demoURL: (schema) => schema.demoURL.url(),
+  imageURL: (schema) => schema.imageURL.url(),
+});
