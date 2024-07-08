@@ -61,3 +61,7 @@ export const selectProjectArabicSchema = selectProjectSchema
     imageAlt: imageAltAR,
     ...rest,
   }));
+
+export type SelectProjectLocaleType =
+  | typeof selectProjectEnglishSchema._type
+  | typeof selectProjectArabicSchema._type;
