@@ -8,14 +8,13 @@ import {
 } from "~/components";
 import { type TLocales } from "~/locales/locales";
 import { readLocaleProjectsOrderedByDate } from "~/server/db/projectQueries";
-import { Locales } from "~/types";
+import { type Locales } from "~/types";
 
 type TProps = {
   localeType: Locales;
   localeData: TLocales["projects"];
 };
 
-// TODO: refactor into smaller components
 export async function ProjectSection({ localeType, localeData }: TProps) {
   const projects = await readLocaleProjectsOrderedByDate({
     locale: localeType,
@@ -35,7 +34,7 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
           <ToggleLocale localeType={localeType} />
         </span>
       </div>
-      {/* // TODO: refactor this */}
+
       {/* 🚫 empty state 🚫 */}
       {projects.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-2 pb-9 text-center lg:pb-0">
@@ -43,6 +42,7 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
           <div className="text-4xl">{localeData.emptyState}</div>
         </div>
       )}
+
       {/* ✨ projects container ✨ */}
       {projects.length > 0 && (
         <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 md:gap-6">
