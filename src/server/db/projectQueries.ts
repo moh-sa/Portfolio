@@ -207,7 +207,7 @@ export async function updateSingleProject({
     await db
       .update(projectSchema)
       .set({ ...parsedData })
-      .where(eq(projectSchema.id, parsedData.id!));
+      .where(eq(projectSchema.id, parsedData.id));
 
     revalidatePath("/[locale]", "page");
     revalidatePath("/dashboard", "page");
