@@ -7,7 +7,7 @@ import {
   ToggleLocale,
 } from "~/components";
 import { type TLocales } from "~/locales/locales";
-import { getAllProjects } from "~/server/queries";
+import { readLocaleProjectsOrderedByDate } from "~/server/db/projectQueries";
 import { Locales } from "~/types";
 
 type TProps = {
@@ -17,10 +17,12 @@ type TProps = {
 
 // TODO: refactor into smaller components
 export async function ProjectSection({ localeType, localeData }: TProps) {
-  const isEnglish = localeType === Locales.ENGLISH;
-  const projects = await getAllProjects({ isEnglish }).then((res) => {
-    if (res?.status === "failure") return [];
-    return res.payload?.filter((project) => !project.isHidden) ?? [];
+  const projects = await readLocaleProjectsOrderedByDate({
+    locale: localeType,
+  }).then((res) => {
+    if (res.status === "failure") return [];
+
+    return res.payload.filter((project) => !project.isHidden) ?? [];
   });
 
   // 👇 source: https://www.magicpattern.design/tools/css-backgrounds

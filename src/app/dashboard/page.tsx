@@ -3,10 +3,13 @@ import { NotePencil, PlusCircle, Trash } from "@phosphor-icons/react/dist/ssr";
 import { Anchor, Icon, ProjectCard } from "~/components";
 import { FormStatusButtonWrapper } from "~/components/UI/Buttons/ClientFormButtonWrapper";
 import { deleteProjectAction } from "~/server/actions";
-import { getAllProjects } from "~/server/queries";
+import { readLocaleProjectsOrderedByDate } from "~/server/db/projectQueries";
+import { Locales } from "~/types";
 
 export default async function DashboardPage() {
-  const projects = await getAllProjects({ isEnglish: true });
+  const projects = await readLocaleProjectsOrderedByDate({
+    locale: Locales.ENGLISH,
+  });
 
   return (
     <>
@@ -23,42 +26,43 @@ export default async function DashboardPage() {
         </div>
       </div>
       <div className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2">
-        {projects?.payload?.map((project, index) => {
-          const deleteActionWithProjectID = deleteProjectAction.bind(null, {
-            projectID: project.id,
-          });
-          return (
-            <ProjectCard
-              key={`${index}-${project.id}-${project.title}`}
-              header={{
-                title: project.title,
-                description: project.description,
-              }}
-              img={{ src: project.imageURL, alt: project.imageAlt }}
-              techStack={project.techStack}
-            >
-              <>
-                <Anchor
-                  href={`/dashboard/edit/${project.id}`}
-                  variant="secondary"
-                  className="flex-[3]"
-                >
-                  <Icon icon={NotePencil} size={20} />
-                  Edit
-                </Anchor>
-                <form action={deleteActionWithProjectID}>
-                  <FormStatusButtonWrapper
-                    variant="destructive"
-                    className="flex-1"
+        {projects.status === "success" &&
+          projects.payload.map((project, index) => {
+            const deleteActionWithProjectID = deleteProjectAction.bind(null, {
+              projectID: project.id,
+            });
+            return (
+              <ProjectCard
+                key={`${index}-${project.id}-${project.title}`}
+                header={{
+                  title: project.title,
+                  description: project.description,
+                }}
+                img={{ src: project.imageURL, alt: project.imageAlt }}
+                techStack={project.techStack}
+              >
+                <>
+                  <Anchor
+                    href={`/dashboard/edit/${project.id}`}
+                    variant="secondary"
+                    className="flex-[3]"
                   >
-                    <Icon icon={Trash} size={20} />
-                    Delete
-                  </FormStatusButtonWrapper>
-                </form>
-              </>
-            </ProjectCard>
-          );
-        })}
+                    <Icon icon={NotePencil} size={20} />
+                    Edit
+                  </Anchor>
+                  <form action={deleteActionWithProjectID}>
+                    <FormStatusButtonWrapper
+                      variant="destructive"
+                      className="flex-1"
+                    >
+                      <Icon icon={Trash} size={20} />
+                      Delete
+                    </FormStatusButtonWrapper>
+                  </form>
+                </>
+              </ProjectCard>
+            );
+          })}
       </div>
     </>
   );

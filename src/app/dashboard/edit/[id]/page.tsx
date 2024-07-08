@@ -1,6 +1,7 @@
+import { type ReactNode } from "react";
 import { FormSection } from "~/components";
 import { updateProjectAction } from "~/server/actions";
-import { getSingleProject } from "~/server/queries";
+import { readProjectByID } from "~/server/db/projectQueries";
 
 type TProps = {
   params: {
@@ -9,11 +10,18 @@ type TProps = {
 };
 
 export default async function EditProjectPage({ params: { id } }: TProps) {
-  const project = await getSingleProject({ projectID: Number(id) });
+  const project = await readProjectByID({ projectID: Number(id) });
+  if (project.status === "failure")
+    return (
+      <>
+        <h1>{project.error.message}</h1>
+        <p>{project.error?.cause as ReactNode}</p>
+      </>
+    );
 
   const actionWithProjectPayload = updateProjectAction.bind(
     null,
-    project.payload!,
+    project.payload,
   );
 
   return (
