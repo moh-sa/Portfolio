@@ -1,345 +1,152 @@
-import { v2 as cloudinary, type UploadApiResponse } from "cloudinary";
 import { desc, eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
-import { PostgresError } from "postgres";
-import { cache } from "react";
-import "server-only";
-import { ZodError } from "zod";
-import { env } from "~/env";
-import { db } from "./db";
-import { insertProjectSchema, projectSchema } from "./db/schemas";
+import { Locales } from "~/types";
+import { arabicField, englishField } from "~/types/ProjectResponseLocaleFields";
+import { type Response } from "~/types/QueriesResponse";
+import { ResponseHandler } from "~/utils/ResponseHandler";
+import { db } from ".";
+import {
+  insertProjectSchema,
+  projectSchema,
+  selectProjectSchema,
+  type InsertProjectType,
+  type SelectProjectLocaleType,
+  type SelectProjectType,
+} from "./schemas";
 
-// TODO: use better error handling approach
-export async function createNewProject({
-  newProject,
+export async function insertProject({
+  project,
 }: {
-  newProject: typeof insertProjectSchema._type;
-}) {
+  project: InsertProjectType;
+}): Promise<Response<void>> {
   try {
-    const parsedData = insertProjectSchema.parse(newProject);
-
+    const parsedData = insertProjectSchema.parse(project);
     await db.insert(projectSchema).values({ ...parsedData });
-
-    revalidatePath("/[locale]", "page");
-    revalidatePath("/dashboard", "page");
-
     return {
       status: "success",
+      payload: undefined,
     };
   } catch (error) {
-    console.log("🚨 error in createNewProject", error);
-    if (error instanceof ZodError) {
-      const errorMap = error.flatten().fieldErrors;
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-          map: errorMap,
-        },
-      };
-    } else if (error instanceof PostgresError) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else if (error instanceof Error) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else {
-      return {
-        status: "failure",
-        error: {
-          message: "Something went wrong while creating a new project",
-          cause: "",
-        },
-      };
-    }
-  }
-}
-
-export const getAllProjects = cache(
-  async ({ isEnglish }: { isEnglish: boolean }) => {
-    try {
-      const projects = await db.query.projectsSchema.findMany({
-        orderBy: [desc(projectSchema.createdAt)],
-      });
-
-      const LocalizedProjects = projects.map((project) => {
-        const {
-          titleEN,
-          titleAR,
-          descriptionEN,
-          descriptionAR,
-          imageAltEN,
-          imageAltAR,
-          ...rest
-        } = project;
-        return {
-          title: isEnglish ? titleEN : titleAR,
-          description: isEnglish ? descriptionEN : descriptionAR,
-          imageAlt: isEnglish ? imageAltEN : imageAltAR,
-          ...rest,
-        };
-      });
-
-      return {
-        status: "success",
-        payload: LocalizedProjects,
-      };
-    } catch (error) {
-      console.log("🚨 error in getAllProjects", error);
-      if (error instanceof ZodError) {
-        const errorMap = error.flatten().fieldErrors;
-        return {
-          status: "failure",
-          error: {
-            message: error.message,
-            cause: error.cause,
-            map: errorMap,
-          },
-        };
-      } else if (error instanceof PostgresError) {
-        return {
-          status: "failure",
-          error: {
-            message: error.message,
-            cause: error.cause,
-          },
-        };
-      } else if (error instanceof Error) {
-        return {
-          status: "failure",
-          error: {
-            message: error.message,
-            cause: error.cause,
-          },
-        };
-      } else {
-        return {
-          status: "failure",
-          error: {
-            message: "Something went wrong while getting all projects",
-            cause: "",
-          },
-        };
-      }
-    }
-  },
-);
-
-export const getSingleProject = cache(
-  async ({ projectID }: { projectID: number }) => {
-    try {
-      const project = await db.query.projectsSchema.findFirst({
-        where: eq(projectSchema.id, projectID),
-      });
-      return {
-        status: "success",
-        payload: project,
-      };
-    } catch (error) {
-      console.log("🚨 error in getSingleProject", error);
-      if (error instanceof ZodError) {
-        const errorMap = error.flatten().fieldErrors;
-        return {
-          status: "failure",
-          error: {
-            message: error.message,
-            cause: error.cause,
-            map: errorMap,
-          },
-        };
-      } else if (error instanceof PostgresError) {
-        return {
-          status: "failure",
-          error: {
-            message: error.message,
-            cause: error.cause,
-          },
-        };
-      } else if (error instanceof Error) {
-        return {
-          status: "failure",
-          error: {
-            message: error.message,
-            cause: error.cause,
-          },
-        };
-      } else {
-        return {
-          status: "failure",
-          error: {
-            message: "Something went wrong while getting a single project",
-            cause: "",
-          },
-        };
-      }
-    }
-  },
-);
-
-export async function updateSingleProject({
-  updatedProject,
-}: {
-  updatedProject: typeof insertProjectSchema._type;
-}) {
-  try {
-    const parsedData = insertProjectSchema.parse(updatedProject);
-
-    const isProjectExists = await getSingleProject({
-      projectID: parsedData.id!,
+    return ResponseHandler.handleError({
+      error: error,
+      cause:
+        "An unexpected error occurred while inserting the project in insertProject",
     });
-
-    if (!isProjectExists) {
-      console.log("🚨 project doesn't exist");
-      throw new Error(`Project with ID: ${parsedData.id} not found`);
-    }
-
-    await db
-      .update(projectSchema)
-      .set({ ...parsedData })
-      .where(eq(projectSchema.id, parsedData.id));
-
-    revalidatePath("/[locale]", "page");
-    revalidatePath("/dashboard", "page");
-
-    return {
-      status: "success",
-    };
-  } catch (error) {
-    console.log("🚨 error in updateSingleProject", error);
-    if (error instanceof ZodError) {
-      const errorMap = error.flatten().fieldErrors;
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-          map: errorMap,
-        },
-      };
-    } else if (error instanceof PostgresError) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else if (error instanceof Error) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else {
-      return {
-        status: "failure",
-        error: {
-          message: "Something went wrong while updating a project",
-          cause: "",
-        },
-      };
-    }
   }
 }
 
-export async function deleteProject(projectID: number) {
+export async function readLocaleProjectsOrderedByDate({
+  locale,
+}: {
+  locale: Locales;
+}): Promise<Response<Array<SelectProjectLocaleType>>> {
   try {
-    const project = await db.query.projectsSchema.findFirst({
+    const query = await db
+      .select({
+        ...(locale === Locales.ENGLISH ? englishField : arabicField),
+      })
+      .from(projectSchema)
+      .orderBy(desc(projectSchema.createdAt));
+
+    if (!query) {
+      return ResponseHandler.handleNotFound({
+        message: "Projects not found",
+        cause: `No projects found in readProjectsOrderedByDate`,
+      });
+    }
+
+    return {
+      status: "success",
+      payload: query,
+    };
+  } catch (error) {
+    return ResponseHandler.handleError({
+      error: error,
+      cause:
+        "An unexpected error occurred while retrieving the project in readProjectByID",
+    });
+  }
+}
+
+export async function readProjectByID({
+  projectID,
+}: {
+  projectID: number;
+}): Promise<Response<SelectProjectType>> {
+  try {
+    const query = await db.query.projectSchema.findFirst({
       where: eq(projectSchema.id, projectID),
     });
 
-    if (!project) {
-      console.log("🚨 project doesn't exist");
-      throw new Error(`Project with ID: ${projectID} not found`);
+    if (!query) {
+      return ResponseHandler.handleNotFound({
+        message: "Project not found",
+        cause: `Project with ID: ${projectID} not found in readProjectByID`,
+      });
     }
-
-    await db.delete(projectSchema).where(eq(projectSchema.id, projectID));
-
-    revalidatePath("/[locale]", "page");
-    revalidatePath("/dashboard", "page");
 
     return {
       status: "success",
+      payload: query,
     };
   } catch (error) {
-    console.log("🚨 error in deleteProject", error);
-    if (error instanceof ZodError) {
-      const errorMap = error.flatten().fieldErrors;
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-          map: errorMap,
-        },
-      };
-    } else if (error instanceof PostgresError) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else if (error instanceof Error) {
-      return {
-        status: "failure",
-        error: {
-          message: error.message,
-          cause: error.cause,
-        },
-      };
-    } else {
-      return {
-        status: "failure",
-        error: {
-          message: `Something went wrong while deleting a project with ID: ${projectID}`,
-          cause: "",
-        },
-      };
-    }
+    return ResponseHandler.handleError({
+      error: error,
+      cause:
+        "An unexpected error occurred while retrieving the project in readProjectByID",
+    });
   }
 }
 
-cloudinary.config({
-  cloud_name: env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-  api_secret: env.CLOUDINARY_API_SECRET,
-});
-export async function uploadImageAndGetURL(formData: FormData) {
-  const file = formData.get("imageURL") as File;
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = new Uint8Array(arrayBuffer);
+export async function updateProject({
+  project,
+}: {
+  project: typeof selectProjectSchema._type;
+}): Promise<Response<void>> {
+  try {
+    const parsedData = selectProjectSchema.parse(project);
 
-  const result: UploadApiResponse | undefined = await new Promise(
-    (resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          { upload_preset: "Portfolio" },
-          function (error, result) {
-            if (error) {
-              reject(error);
-              return;
-            }
-            resolve(result);
-          },
-        )
-        .end(buffer);
-    },
-  );
+    const isProjectExists = await readProjectByID({
+      projectID: parsedData.id,
+    });
+    if (isProjectExists.status === "failure") return isProjectExists;
 
-  return result?.secure_url;
+    await db
+      .update(projectSchema)
+      .set({ ...project })
+      .where(eq(projectSchema.id, project.id));
+    return {
+      status: "success",
+      payload: undefined,
+    };
+  } catch (error) {
+    return ResponseHandler.handleError({
+      error: error,
+      cause: `An unexpected error occurred while updating a project with ID: ${project.id} in updateProject`,
+    });
+  }
+}
+
+export async function deleteProject({
+  projectID,
+}: {
+  projectID: number;
+}): Promise<Response<void>> {
+  try {
+    const isProjectExists = await readProjectByID({
+      projectID: projectID,
+    });
+    if (isProjectExists.status === "failure") return isProjectExists;
+
+    await db.delete(projectSchema).where(eq(projectSchema.id, projectID));
+
+    return {
+      status: "success",
+      payload: undefined,
+    };
+  } catch (error) {
+    return ResponseHandler.handleError({
+      error: error,
+      cause: `An unexpected error occurred while deleting a project with ID: ${projectID} in deleteProject`,
+    });
+  }
 }
