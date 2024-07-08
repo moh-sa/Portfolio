@@ -1,4 +1,5 @@
 import { serial, text, varchar } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { createTable } from "./base";
 
 export const profileSchema = createTable("profiles", {
@@ -59,3 +60,20 @@ export const profileSchema = createTable("profiles", {
     .notNull()
     .default(""),
 });
+
+// Zod Schemas
+export const insertProfileSchema = createInsertSchema(profileSchema, {
+  email: (schema) => schema.email.email(),
+  resumeLink: (schema) => schema.resumeLink.url(),
+  linkedinLink: (schema) => schema.linkedinLink.url(),
+  githubLink: (schema) => schema.githubLink.url(),
+});
+export type InsertProfileType = typeof insertProfileSchema._type;
+
+export const selectProfileSchema = createSelectSchema(profileSchema, {
+  email: (schema) => schema.email.email(),
+  resumeLink: (schema) => schema.resumeLink.url(),
+  linkedinLink: (schema) => schema.linkedinLink.url(),
+  githubLink: (schema) => schema.githubLink.url(),
+});
+export type SelectProfileType = typeof selectProfileSchema._type;
