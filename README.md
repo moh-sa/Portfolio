@@ -3,7 +3,7 @@
   <h1 align="center">Portfolio</h1>
 
   <p>
-  A Minimalist portfolio created built with Next.js app router, Clerk, Vercel Postgres, Drizzle ORM, Cloudinary, tailwind, and Phosphor Icons.
+  A Minimalist portfolio built with Next.js app router, Clerk, Vercel Postgres, Drizzle ORM, Cloudinary, tailwind, and Phosphor Icons.
   </p>
 </p>
 
