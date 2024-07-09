@@ -70,11 +70,18 @@ export async function readLocaleProjectsOrderedByDate({
 export async function readProjectByID({
   projectID,
 }: {
-  projectID: number;
+  projectID: number | string;
 }): Promise<Response<SelectProjectType>> {
+  if (!Number.isInteger(Number(projectID))) {
+    return ResponseHandler.handleError({
+      error: undefined,
+      cause: `Project ID '${projectID}' is not a valid integer`,
+    });
+  }
+
   try {
     const query = await db.query.projectSchema.findFirst({
-      where: eq(projectSchema.id, projectID),
+      where: eq(projectSchema.id, Number(projectID)),
     });
 
     if (!query) {

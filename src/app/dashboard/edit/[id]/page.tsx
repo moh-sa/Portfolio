@@ -10,7 +10,8 @@ type TProps = {
 };
 
 export default async function EditProjectPage({ params: { id } }: TProps) {
-  const project = await readProjectByID({ projectID: Number(id) });
+  const project = await readProjectByID({ projectID: id });
+
   if (project.status === "failure")
     return (
       <>
