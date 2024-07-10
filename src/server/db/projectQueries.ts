@@ -119,7 +119,7 @@ export async function updateProject({
 
     await db
       .update(projectSchema)
-      .set({ ...project })
+      .set({ ...parsedData })
       .where(eq(projectSchema.id, project.id));
     return {
       status: "success",
