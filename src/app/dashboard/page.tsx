@@ -16,7 +16,7 @@ export default async function DashboardPage() {
       <div className="mb-4 flex flex-col flex-wrap items-center justify-between gap-2 lg:flex-row">
         <h1 className="text-center text-2xl text-white">My Projects</h1>
         <div className="flex items-center justify-evenly gap-2">
-          <Anchor href="/dashboard/add" variant="ghost">
+          <Anchor href="/dashboard/project/add" variant="ghost">
             <Icon icon={PlusCircle} />
             Add Project
           </Anchor>
@@ -43,7 +43,7 @@ export default async function DashboardPage() {
               >
                 <>
                   <Anchor
-                    href={`/dashboard/edit/${project.id}`}
+                    href={`/dashboard/project/edit/${project.id}`}
                     variant="secondary"
                     className="flex-[3]"
                   >
