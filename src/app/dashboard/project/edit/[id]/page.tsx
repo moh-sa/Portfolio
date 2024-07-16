@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { FormSection } from "~/components";
+import { FormWrapper } from "~/components";
 import { updateProjectAction } from "~/server/actions";
 import { readProjectByID } from "~/server/db/projectQueries";
 
@@ -26,7 +26,7 @@ export default async function EditProjectPage({ params: { id } }: TProps) {
   );
 
   return (
-    <FormSection
+    <FormWrapper
       heading="Edit Project"
       project={project.payload}
       formAction={actionWithProjectPayload}

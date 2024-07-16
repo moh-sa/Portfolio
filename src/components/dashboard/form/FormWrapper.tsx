@@ -12,7 +12,7 @@ type TProps = {
   formAction: (formData: FormData) => void;
 };
 
-export function FormSection({ heading, project, formAction }: TProps) {
+export function FormWrapper({ heading, project, formAction }: TProps) {
   return (
     <div className="w-full max-w-xl px-4">
       <FormHeader heading={heading} />
