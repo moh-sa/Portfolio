@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { ProjectForm } from "~/components/dashboard/Project/ProjectForm";
+import { ProjectForm } from "~/components/dashboard/ProjectForm";
 import { updateProjectAction } from "~/server/actions";
 import { readProjectByID } from "~/server/db/projectQueries";
 
