@@ -6,7 +6,7 @@ type TProps = {
   project?: typeof insertProjectSchema._type;
   formAction: (formData: FormData) => void;
 };
-export function Form({ project, formAction }: TProps) {
+export function FormElement({ project, formAction }: TProps) {
   return (
     <form className="space-y-6" action={formAction}>
       {/* ✨ TITLE ✨ */}
