@@ -36,7 +36,10 @@ export default clerkMiddleware(async (auth, request) => {
     return NextResponse.rewrite(request.nextUrl);
   }
 
-    return NextResponse.next();
+  // Check if the pathname starts with /dashboard/login
+  if (pathname.startsWith("/dashboard/login")) {
+    request.nextUrl.pathname = "/dashboard";
+    return NextResponse.redirect(request.nextUrl);
   }
 
   // Check if the user has an admin role
