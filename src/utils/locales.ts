@@ -8,12 +8,9 @@ export function getLocaleType(request: NextRequest) {
   if (!langHeader) return "en";
 
   const locales = Object.values(Locales);
-
   const headers = { "accept-language": langHeader };
-  // eslint-disable-next-line
   const languages = new Negotiator({ headers }).languages();
   const defaultLocale = "en";
 
-  // eslint-disable-next-line
   return match(languages, locales, defaultLocale);
 }
