@@ -8,37 +8,43 @@ import { Locales } from "~/types/locales";
 import { getLocaleType } from "~/utils/";
 
 const locales = Object.values(Locales);
-
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+
 export default clerkMiddleware(async (auth, request) => {
   const { pathname } = request.nextUrl;
 
-  if (isProtectedRoute(request)) {
-    const user = auth();
+  if (!isProtectedRoute(request)) {
+    // Check if there is any supported locale in the pathname
+    const pathnameHasLocale = locales.some(
+      (locale) =>
+        pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+    );
+    if (pathnameHasLocale) return;
 
-    if (!user.userId) {
-      if (pathname === "/dashboard/login") return NextResponse.next();
-
-      const url = request.nextUrl.clone();
-      url.pathname = "/dashboard/login";
-      return NextResponse.rewrite(url);
-    }
-
-    const userDetails = await clerkClient.users.getUser(user.userId);
-    if (userDetails?.privateMetadata?.isAdmin) return NextResponse.next();
-
-    return NextResponse.redirect(new URL("/", request.url));
+    // Get the locale from the request headers
+    // and redirect the user to the corresponding path
+    const locale = getLocaleType(request);
+    request.nextUrl.pathname = `/${locale}${pathname}`;
+    return NextResponse.redirect(request.nextUrl);
   }
 
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-  );
+  // Check if the user is logged in
+  const user = auth();
+  if (!user.userId) {
+    if (!pathname.startsWith("/dashboard/login")) {
+      return NextResponse.rewrite(new URL("/dashboard/login", request.nextUrl));
+    }
 
-  if (pathnameHasLocale) return;
+    return NextResponse.next();
+  }
 
-  const locale = getLocaleType(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  // Check if the user has an admin role
+  const userDetails = await clerkClient.users.getUser(user.userId);
+  if (!userDetails?.privateMetadata?.isAdmin) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
+  }
+
+  return NextResponse.next();
 });
 
 export const config = {
