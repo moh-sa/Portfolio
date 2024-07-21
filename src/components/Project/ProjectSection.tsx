@@ -39,7 +39,9 @@ export async function ProjectSection({ localeType, localeData }: TProps) {
       {projects.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-2 pb-9 text-center lg:pb-0">
           <Icon icon={XCircle} size={64} />
-          <div className="text-4xl">{localeData.emptyState}</div>
+          <div className="whitespace-pre-line text-4xl">
+            {localeData.emptyState}
+          </div>
         </div>
       )}
 
