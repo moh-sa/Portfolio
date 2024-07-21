@@ -27,6 +27,8 @@ const EN = {
   },
   projects: {
     heading: "My Projects",
+    emptyState:
+      "Whoops! My projects are on a coffee break!\nHaving trouble connecting to the database.\nPlease check back soon.",
     demoLabel: "Live Demo",
     repoLabel: "Code",
     noButtonsLabel: "Not Available",
