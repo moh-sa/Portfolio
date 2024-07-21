@@ -26,8 +26,7 @@ const EN = {
     },
   },
   projects: {
-    heading: "My Profiles",
-    emptyState: "It looks like I forgot to populate my portfolio.",
+    heading: "My Projects",
     demoLabel: "Live Demo",
     repoLabel: "Code",
     noButtonsLabel: "Not Available",
