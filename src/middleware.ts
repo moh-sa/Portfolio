@@ -29,11 +29,12 @@ export default clerkMiddleware(async (auth, request) => {
   }
 
   // Check if the user is logged in
+  // if not, redirect to the login page
   const user = auth();
   if (!user.userId) {
-    if (!pathname.startsWith("/dashboard/login")) {
-      return NextResponse.rewrite(new URL("/dashboard/login", request.nextUrl));
-    }
+    request.nextUrl.pathname = "/dashboard/login";
+    return NextResponse.rewrite(request.nextUrl);
+  }
 
     return NextResponse.next();
   }
