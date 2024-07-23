@@ -14,7 +14,7 @@ const EN = {
     bio: {
       name: "Mohammed Sobhi",
       description:
-        "A Computer Engineer passionate about crafting user-friendly and accessible web applications with exceptional functionality",
+        "A Software Engineer with a B.E. in Computer Engineering, passionate about crafting visually appealing, user-friendly, and high-quality full-stack web apps while following the best practices",
     },
     skills: {
       heading: "Tech Stack",
