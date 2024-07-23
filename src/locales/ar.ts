@@ -2,9 +2,9 @@ import { profileSkillsData, socialLinksDataAR } from "~/data";
 import { env } from "~/env";
 const AR = {
   metadata: {
-    title: "أبرز أعمال محمد صبحي",
+    title: "محمد صبحي - مهندس برمجيات",
     description:
-      "مهندس كمبيوتر شغوف بصناعة تطبيقات ويب ذات وظائف استثنائية وسهلة الاستخدام",
+      "مهندس برمجيات شغوف بتطوير تطبيقات ويب متكاملة تجمع بين القدرات الاستثنائية، الجاذبية البصرية، وسهولة الاستخدام لتقديم تجارب رقمية فريدة",
     url: `${env.NEXT_PUBLIC_URL}/ar`,
     ogImgUrl: `${env.NEXT_PUBLIC_URL}/og_ar.png`,
     ogImgAlt: "آخر أعمال محمد صبحي",

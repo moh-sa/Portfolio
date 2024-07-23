@@ -3,9 +3,9 @@ import { env } from "~/env";
 
 const EN = {
   metadata: {
-    title: "Mohammed Sobhi's Portfolio",
+    title: "Mohammed Sobhi - Software Engineer",
     description:
-      "A Computer Engineer passionate about crafting user-friendly and accessible web applications with exceptional functionality",
+      "A Software Engineer passionate about crafting visually appealing, user-friendly, and high-quality full-stack web applications",
     url: `${env.NEXT_PUBLIC_URL}/en`,
     ogImgUrl: `${env.NEXT_PUBLIC_URL}/og_en.png`,
     ogImgAlt: "Mohammed Sobhi Portfolio",
