@@ -5,7 +5,7 @@ const EN = {
   metadata: {
     title: "Mohammed Sobhi - Software Engineer",
     description:
-      "A Software Engineer passionate about crafting visually appealing, user-friendly, and high-quality full-stack web applications",
+      "A Software Engineer passionate about crafting visually appealing, user-friendly, and high-quality full-stack web applications.",
     url: `${env.NEXT_PUBLIC_URL}/en`,
     ogImgUrl: `${env.NEXT_PUBLIC_URL}/og_en.png`,
     ogImgAlt: "Mohammed Sobhi Portfolio",
@@ -14,7 +14,7 @@ const EN = {
     bio: {
       name: "Mohammed Sobhi",
       description:
-        "A Software Engineer with a B.E. in Computer Engineering, passionate about crafting visually appealing, user-friendly, and high-quality full-stack web apps while following the best practices",
+        "A Software Engineer with a B.E. in Computer Engineering, passionate about crafting visually appealing, user-friendly, and high-quality full-stack web apps while following the industry best practices and Accessibility Guidelines",
     },
     skills: {
       heading: "Tech Stack",
